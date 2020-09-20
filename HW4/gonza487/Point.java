@@ -1,9 +1,20 @@
 public class Point extends ComparableArray {
+   public Point(int[] data) {
+      super(data);
+   }
+
+   public Point(ComparableArray source) {
+      super(source);
+   }
+
+   public Point(int x, int y) {
+      super(new int[]{x, y});
+   }
 
    // create constructors as needed.
 
    /*
-    * haschCode( ) should return an int based on the values of the object fields
+    * hashCode( ) should return an int based on the values of the object fields
     * equals( ) should return true if two objects are equal based on the values of the
     * object fields.  Given IntArray objects i1, i2 and i3, it must also be the case 
     * that 
@@ -19,7 +30,11 @@ public class Point extends ComparableArray {
     * As long as these rules are followed, you can implement hashCode( ) and equals( )
     * any way you want.
     */
-   public int hashCode( );
+   public int hashCode( ) {
+      return ary.hashCode();
+   }
 
-   public boolean equals(Point a);
+   public boolean equals(Point a) {
+      return (compareTo(a) == 0);
+   }
 }

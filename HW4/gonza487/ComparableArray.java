@@ -48,6 +48,33 @@ public class ComparableArray {
     * this.ary = [0, 4, 1]  and a.ary = [0, 1, 1, 1, 1], this > a by (4), (k+1 = 1) 
     */
    public int compareTo(ComparableArray a) {
+      // walk through both arrays simultaneously, comparing each element one by one
+      int i = 0;
+      int result = 0; // assume equal for now
+      while (i < this.ary.length) {
+         if (i < a.ary.length) {
+            if (this.ary[i] < a.ary[i]) {
+               return -1; // this.ary < a.ary
+            } else if (this.ary[i] > a.ary[i]) {
+               return 1; // this.ary > a.ary
+            } // equal, keep going
+         } else { // this.ary is longer
+            while (i < this.ary.length) {
+               if (this.ary[i] != 0) {
+                  return 1; // this.ary > a.ary
+               }
+               i++;
+            }
+            return 0; // no non-zero elements for the rest of this.ary, this.ary = a.ary
+         }
+         i++;
+      }
+      while (i < a.ary.length) { // a.ary is longer?
+         if (a.ary[i] != 0) {
+            return -1; // this.ary < a.ary
+         }
+         i++;
+      } // no non-zero elements for the rest of a.ary, this.ary = a.ary
       return 0;
    }
          
@@ -62,11 +89,20 @@ public class ComparableArray {
 
    // set all elements of ary to n
    public void makeNumber(int n) {
+      for (int i = 0; i < ary.length; i++) {
+         ary[i] = n;
+      }
    }
 
    // print out the elements of ary
    public String toString( ) {
-      return "";
+      String arystring = "[";
+      int i;
+      for (i = 0; i < ary.length - 1; i++) {
+         arystring = arystring.concat(ary[i] + ", ");
+      }
+      arystring = arystring.concat(ary[i] + "]");
+      return arystring;
    }
    
    private int min(int i, int j) {
