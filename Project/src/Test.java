@@ -24,19 +24,10 @@ public class Test {
             DungeonXMLHandler handler = new DungeonXMLHandler();
             saxParser.parse(new File(fileName), handler);
             // This will change depending on what kind of XML we are parsing
-            Student[ ] students = handler.getStudents();
+            Dungeon dungeon = handler.getDungeon();
             // print out all of the students.  This will change depending on
             // what kind of XML we are parsing
-            for (Student student : students) {
-                System.out.println(student);
-            }
-            /*
-             * the above is a different form of
-             for (int i = 0; i < students.length; i++) {
-                System.out.println(students[i]);
-            }
-            */
-            // these lines should be copied exactly.
+            System.out.println(dungeon);
         } catch (ParserConfigurationException | SAXException | IOException e) {
             e.printStackTrace(System.out);
         }
