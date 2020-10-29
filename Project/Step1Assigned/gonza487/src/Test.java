@@ -10,7 +10,7 @@ public class Test {
         // Ensure file name passed in
         String fileName = null;
         if (args.length == 1) {
-            fileName = "../xmlFiles/" + args[0];
+            fileName = "xmlFiles/" + args[0];
         } else {
             System.out.println("java Test <xmlfilename>");
             return;

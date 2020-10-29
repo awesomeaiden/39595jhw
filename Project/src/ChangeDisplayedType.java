@@ -1,9 +1,0 @@
-public class ChangeDisplayedType extends CreatureAction {
-    private String name;
-
-    public ChangeDisplayedType(String _name, Creature _owner) {
-        super(_owner);
-        System.out.println("Creating ChangedDisplayType: " + _name + _owner);
-        name = _name;
-    }
-}
