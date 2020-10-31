@@ -42,7 +42,7 @@ public class ObjectDisplayGrid extends JFrame implements KeyListener, InputSubje
         initializeDisplay();
 
         super.add(terminal);
-        super.setSize(width * 9, height * 16);
+        super.setSize(width * 10, height * 17);
         super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         super.setVisible(true);
         terminal.setVisible(true);
@@ -91,9 +91,9 @@ public class ObjectDisplayGrid extends JFrame implements KeyListener, InputSubje
         Char ch = new Char(' ');
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
-//                addObjectToDisplay(ch, i, j);
-                char testChar = (char) ((i + j) % 10 + 48);
-                addObjectToDisplay(new Char(testChar), i, j);
+                addObjectToDisplay(ch, i, j);
+//                char testChar = (char) ((i + j) % 10 + 48);
+//                addObjectToDisplay(new Char(testChar), i, j);
             }
         }
         terminal.repaint();
@@ -114,6 +114,10 @@ public class ObjectDisplayGrid extends JFrame implements KeyListener, InputSubje
                 writeToTerminal(x, y);
             }
         }
+    }
+
+    public Char getObjectFromDisplay(int x, int y) {
+        return objectGrid[x][y];
     }
 
     private void writeToTerminal(int x, int y) {

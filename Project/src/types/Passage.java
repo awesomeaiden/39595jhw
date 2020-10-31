@@ -27,4 +27,12 @@ public class Passage extends Structure {
         System.out.println("Setting PosY for passage: " + posY);
         posYs.add(posY);
     }
+
+    public ArrayList<Integer> getPosXs() {
+        return posXs;
+    }
+
+    public ArrayList<Integer> getPosYs() {
+        return posYs;
+    }
 }

@@ -65,4 +65,8 @@ public class Dungeon {
     public ArrayList<Room> getRooms() {
         return rooms;
     }
+
+    public ArrayList<Passage> getPassages() {
+        return passages;
+    }
 }

@@ -86,6 +86,15 @@ public class Rogue implements Runnable {
             }
         }
 
+        // Now draw passages:
+        ArrayList<Passage> passages = dungeon.getPassages();
+        Passage passage;
+        int passageInd;
+        for (passageInd = 0; passageInd < passages.size(); passageInd++) {
+            passage = passages.get(passageInd);
+            drawPassage(passage);
+        }
+
         // Now draw top area
         String topText = "HP: " + playerHP + "  core:  " + playerCore;
         for (col = 0; col < topText.length(); col++) {
@@ -100,6 +109,60 @@ public class Rogue implements Runnable {
         String infoString = "Info:";
         for (col = 0; col < infoString.length(); col++) {
             displayGrid.addObjectToDisplay(new Char(infoString.charAt(col)), col, displayGrid.getHeight() - 1);
+        }
+    }
+
+    public void drawPassage(Passage passage) {
+        int posInd;
+        ArrayList<Integer> posXs = passage.getPosXs();
+        ArrayList<Integer> posYs = passage.getPosYs();
+        Integer posX1;
+        Integer posY1;
+        Integer posX2;
+        Integer posY2;
+        for (posInd = 0; posInd < posXs.size() - 1; posInd++) {
+            posX1 = posXs.get(posInd);
+            posY1 = posYs.get(posInd);
+            posX2 = posXs.get(posInd + 1);
+            posY2 = posYs.get(posInd + 1);
+            if (posX1.equals(posX2)) { // vertical passage
+                drawVerticalLine(posX1, posY1, posY2);
+            } else if (posY1.equals(posY2)) { // horizontal passage
+                drawHorizontalLine(posX1, posY1, posX2);
+            }
+        }
+    }
+
+    public void drawVerticalLine(Integer posX1, Integer posY1, Integer posY2) {
+        while (!posY1.equals(posY2)) {
+            addPassageChar(posX1, posY1);
+            if (posY1 < posY2) {
+                posY1++;
+            } else {
+                posY1--;
+            }
+        }
+        addPassageChar(posX1, posY1);
+    }
+
+    public void drawHorizontalLine(Integer posX1, Integer posY1, Integer posX2) {
+        while (!posX1.equals(posX2)) {
+            addPassageChar(posX1, posY1);
+            if (posX1 < posX2) {
+                posX1++;
+            } else {
+                posX1--;
+            }
+        }
+        addPassageChar(posX1, posY1);
+    }
+
+    public void addPassageChar(Integer posX, Integer posY) {
+        Char curChar = displayGrid.getObjectFromDisplay(posX, posY + displayGrid.getTopHeight());
+        if (curChar.getChar() == 'X') {
+            displayGrid.addObjectToDisplay(new Char('+'), posX, posY + displayGrid.getTopHeight());
+        } else {
+            displayGrid.addObjectToDisplay(new Char('#'), posX, posY + displayGrid.getTopHeight());
         }
     }
 
