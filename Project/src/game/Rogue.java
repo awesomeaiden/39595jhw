@@ -1,12 +1,13 @@
 package game;
 
 import types.*;
-
 import java.util.ArrayList;
 
 public class Rogue implements Runnable {
 
     private static final int DEBUG = 0;
+    private int playerPosX;
+    private int playerPosY;
     private boolean isRunning;
     public static final int FRAMESPERSECOND = 60;
     public static final int TIMEPERLOOP = 1000000000 / FRAMESPERSECOND;
@@ -15,6 +16,8 @@ public class Rogue implements Runnable {
     private Thread keyStrokePrinter;
     private static final int WIDTH = 80;
     private static final int HEIGHT = 40;
+
+    private Thread PlayerMover;
 
     @Override
     public void run() {
@@ -39,7 +42,7 @@ public class Rogue implements Runnable {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        displayGrid.fireUp();
+        // displayGrid.fireUp();
         int line;
         int col;
         int roomInd;
@@ -71,6 +74,8 @@ public class Rogue implements Runnable {
                 creature = creatures.get(creatureInd);
                 if (creature instanceof Player) {
                     playerHP = creature.getHp();
+                    playerPosX = creature.getPosX() + room.getPosX();
+                    playerPosY = creature.getPosY() + room.getPosY() + displayGrid.getTopHeight();
                 }
                 displayGrid.addObjectToDisplay(new Char(creature.getChar()), room.getPosX() + creature.getPosX(),
                         room.getPosY() + creature.getPosY() + displayGrid.getTopHeight());
@@ -191,13 +196,12 @@ public class Rogue implements Runnable {
 
         // Draw dungeon
         Rogue rogue = new Rogue();
-        Thread testThread = new Thread(rogue);
-        testThread.start();
+        Thread rogueThread = new Thread(rogue);
+        rogueThread.start();
 
-        rogue.keyStrokePrinter = new Thread(new KeyStrokePrinter(displayGrid));
-        rogue.keyStrokePrinter.start();
-
-        testThread.join();
-        rogue.keyStrokePrinter.join();
+        rogueThread.join();
+        rogue.PlayerMover = new Thread(new PlayerMover(displayGrid, rogue.playerPosX, rogue.playerPosY));
+        rogue.PlayerMover.start();
+        rogue.PlayerMover.join();
     }
 }
