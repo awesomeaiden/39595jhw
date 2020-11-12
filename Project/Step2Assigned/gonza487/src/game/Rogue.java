@@ -18,10 +18,25 @@ public class Rogue implements Runnable {
     private static final int HEIGHT = 40;
 
     private Thread PlayerMover;
-    private static Player player;
 
     @Override
     public void run() {
+        // Testing code:
+//        displayGrid.fireUp();
+//        for (int step = 1; step < WIDTH / 2; step *= 2) {
+//            for (int i = 0; i < WIDTH; i += step) {
+//                for (int j = 0; j < HEIGHT; j += step) {
+//                    displayGrid.addObjectToDisplay(new Char('X'), i, j);
+//                }
+//            }
+//
+//            try {
+//                Thread.sleep(2000);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace(System.err);
+//            }
+//            displayGrid.initializeDisplay();
+//        }
         try { // wait for asciipanel initialization
             Thread.sleep(500);
         } catch (InterruptedException e) {
@@ -61,11 +76,8 @@ public class Rogue implements Runnable {
                     playerHP = creature.getHp();
                     playerPosX = creature.getPosX() + room.getPosX();
                     playerPosY = creature.getPosY() + room.getPosY() + displayGrid.getTopHeight();
-                    displayGrid.addObjectToDisplay(new Char('.'), room.getPosX() + creature.getPosX(),
-                            room.getPosY() + creature.getPosY() + displayGrid.getTopHeight());
-                    player = (Player)creature;
                 }
-                displayGrid.addObjectToDisplay(creature, room.getPosX() + creature.getPosX(),
+                displayGrid.addObjectToDisplay(new Char(creature.getChar()), room.getPosX() + creature.getPosX(),
                         room.getPosY() + creature.getPosY() + displayGrid.getTopHeight());
             }
             // Now add items
@@ -74,7 +86,7 @@ public class Rogue implements Runnable {
             int itemInd;
             for (itemInd = 0; itemInd < items.size(); itemInd++) {
                 item = items.get(itemInd);
-                displayGrid.addObjectToDisplay(item, room.getPosX() + item.getPosX(),
+                displayGrid.addObjectToDisplay(new Char(item.getChar()), room.getPosX() + item.getPosX(),
                         room.getPosY() + item.getPosY() + displayGrid.getTopHeight());
             }
         }
@@ -151,13 +163,11 @@ public class Rogue implements Runnable {
     }
 
     public void addPassageChar(Integer posX, Integer posY) {
-        Object curObj = displayGrid.getObjectFromDisplay(posX, posY + displayGrid.getTopHeight());
-        if (curObj instanceof Char) {
-            if (((Char)curObj).getChar() == 'X') {
-                displayGrid.addObjectToDisplay(new Char('+'), posX, posY + displayGrid.getTopHeight());
-            } else {
-                displayGrid.addObjectToDisplay(new Char('#'), posX, posY + displayGrid.getTopHeight());
-            }
+        Char curChar = displayGrid.getObjectFromDisplay(posX, posY + displayGrid.getTopHeight());
+        if (curChar.getChar() == 'X') {
+            displayGrid.addObjectToDisplay(new Char('+'), posX, posY + displayGrid.getTopHeight());
+        } else {
+            displayGrid.addObjectToDisplay(new Char('#'), posX, posY + displayGrid.getTopHeight());
         }
     }
 
@@ -190,7 +200,7 @@ public class Rogue implements Runnable {
         rogueThread.start();
 
         rogueThread.join();
-        rogue.PlayerMover = new Thread(new PlayerMover(displayGrid, rogue.playerPosX, rogue.playerPosY, player));
+        rogue.PlayerMover = new Thread(new PlayerMover(displayGrid, rogue.playerPosX, rogue.playerPosY));
         rogue.PlayerMover.start();
         rogue.PlayerMover.join();
     }

@@ -12,8 +12,6 @@ public class Displayable {
     private int value;
     private int posX;
     private int posY;
-    private int dispPosX;
-    private int dispPosY;
     private int width;
     private int height;
 
@@ -66,16 +64,6 @@ public class Displayable {
         this.posY = posY;
     }
 
-    public void setDispPosX(int dispPosX) {
-        System.out.println("Setting DispPosX: " + dispPosX);
-        this.dispPosX = dispPosX;
-    }
-
-    public void setDispPosY(int dispPosY) {
-        System.out.println("setting DispPosY: " + dispPosY);
-        this.dispPosY = dispPosY;
-    }
-
     public void setWidth(int width) {
         System.out.println("Setting width: " + width);
         this.width = width;
@@ -116,14 +104,6 @@ public class Displayable {
 
     public int getPosY() {
         return posY;
-    }
-
-    public int getDispPosX() {
-        return dispPosX;
-    }
-
-    public int getDispPosY() {
-        return dispPosY;
     }
 
     public int getWidth() {

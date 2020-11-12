@@ -10,9 +10,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Stack;
-
-import static java.lang.Math.round;
 
 public class ObjectDisplayGrid extends JFrame implements KeyListener, InputSubject {
     // ObjectDisplayGrid private attributes
@@ -27,7 +24,7 @@ public class ObjectDisplayGrid extends JFrame implements KeyListener, InputSubje
     private static final String CLASSID = "ObjectDisplayGrid";
 
     private static AsciiPanel terminal;
-    private Stack[][] objectGrid;
+    private Char[][] objectGrid = null;
 
     private List<InputObserver> inputObservers = null;
 
@@ -40,17 +37,12 @@ public class ObjectDisplayGrid extends JFrame implements KeyListener, InputSubje
         setHeight();
 
         terminal = new AsciiPanel(width, height);
-        objectGrid = new Stack[width][height];
-        for (int i = 0; i < objectGrid.length; i++) {
-            for (int j = 0; j < objectGrid[0].length; j++) {
-                objectGrid[i][j] = new Stack();
-            }
-        }
+        objectGrid = new Char[width][height];
 
         initializeDisplay();
 
         super.add(terminal);
-        super.setSize((int)round(width * 9.25), height * 17);
+        super.setSize(width * 10, height * 17);
         super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         super.setVisible(true);
         terminal.setVisible(true);
@@ -96,9 +88,12 @@ public class ObjectDisplayGrid extends JFrame implements KeyListener, InputSubje
     }
 
     public final void initializeDisplay() {
+        Char ch = new Char(' ');
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
-                addObjectToDisplay(new Char(' '), i, j);
+                addObjectToDisplay(ch, i, j);
+//                char testChar = (char) ((i + j) % 10 + 48);
+//                addObjectToDisplay(new Char(testChar), i, j);
             }
         }
         terminal.repaint();
@@ -112,79 +107,28 @@ public class ObjectDisplayGrid extends JFrame implements KeyListener, InputSubje
         }
     }
 
-    public void addObjectToDisplay(Displayable obj, int x, int y) {
+    public void addObjectToDisplay(Char ch, int x, int y) {
         if ((0 <= x) && (x < objectGrid.length)) {
             if ((0 <= y) && (y < objectGrid[0].length)) {
-                obj.setDispPosX(x);
-                obj.setDispPosY(y);
-                objectGrid[x][y].push(obj);
+                objectGrid[x][y] = ch;
                 writeToTerminal(x, y);
             }
         }
     }
 
-    public Displayable removeObjectFromDisplay(int x, int y) {
+    public Char getObjectFromDisplay(int x, int y) {
         if ((0 <= x) && (x < objectGrid.length)) {
             if ((0 <= y) && (y < objectGrid[0].length)) {
-                if (objectGrid[x][y].size() > 1) {
-                    Displayable remove = (Displayable) objectGrid[x][y].pop();
-                    writeToTerminal(x, y);
-                    return remove;
-                }
-            }
-        }
-        return new Char(' ');
-    }
-
-    public Displayable getObjectFromDisplay(int x, int y) {
-        if ((0 <= x) && (x < objectGrid.length)) {
-            if ((0 <= y) && (y < objectGrid[0].length)) {
-                return (Displayable)objectGrid[x][y].peek();
+                return objectGrid[x][y];
             }
         }
         return new Char('0');
     }
 
     private void writeToTerminal(int x, int y) {
-        char ch = ((Displayable)objectGrid[x][y].peek()).getChar();
+        char ch = objectGrid[x][y].getChar();
         terminal.write(ch, x, y);
         terminal.repaint();
-    }
-
-    public void displayInfo(String info) {
-        String infoString = "Info: " + info;
-        int col;
-        for (col = 0; col < infoString.length(); col++) {
-            removeObjectFromDisplay(col, getHeight() - 1);
-            addObjectToDisplay(new Char(infoString.charAt(col)), col, getHeight() - 1);
-            try { // give asciipanel some time, fixes missing characters issue
-                Thread.sleep(3);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-        while (col < objectGrid.length) {
-            removeObjectFromDisplay(col, getHeight() - 1);
-            col++;
-        }
-    }
-
-    public void displayHp(int hp) {
-        String hpString = "HP: " + Integer.toString(hp);
-        int col;
-        for (col = 0; col < hpString.length(); col++) {
-            removeObjectFromDisplay(col, 0);
-            addObjectToDisplay(new Char(hpString.charAt(col)), col, 0);
-            try { // give asciipanel some time, fixes missing characters issue
-                Thread.sleep(3);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-        while (col < objectGrid.length) {
-            removeObjectFromDisplay(col, 0);
-            col++;
-        }
     }
 
     // Used by code outside the class to get a dungeon

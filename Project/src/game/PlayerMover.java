@@ -1,7 +1,12 @@
 package game;
 
+import types.Displayable;
+import types.Monster;
+import types.Player;
+
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.Random;
 
 public class PlayerMover implements InputObserver, Runnable {
 
@@ -12,12 +17,16 @@ public class PlayerMover implements InputObserver, Runnable {
     private int posX;
     private int posY;
     private Char oldChar = new Char('.');
+    private Random random = new Random();
+    private Player player;
+    private boolean playerDead = false;
 
-    public PlayerMover(types.ObjectDisplayGrid grid, int _posX, int _posY) {
+    public PlayerMover(types.ObjectDisplayGrid grid, int _posX, int _posY, Player _player) {
         inputQueue = new ConcurrentLinkedQueue<>();
         displayGrid = grid;
         posX = _posX;
         posY = _posY;
+        player = _player;
     }
 
     @Override
@@ -51,14 +60,17 @@ public class PlayerMover implements InputObserver, Runnable {
                 if (ch == 'X') {
                     System.out.println("got an X, ending input checking");
                     return false;
+                } else if (playerDead) {
+                    System.out.println("player is dead, game is over, input stopped!");
+                    return false;
                 } else {
-                    if (ch == 'w' && posY > displayGrid.getTopHeight()) {
+                    if (ch == 'k' && posY > displayGrid.getTopHeight()) {
                         movePlayer(posX, posY - 1);
-                    } else if (ch == 'a' && posX > 0) {
+                    } else if (ch == 'h' && posX > 0) {
                         movePlayer(posX - 1, posY);
-                    } else if (ch == 's' && posY < displayGrid.getHeight() - 1) {
+                    } else if (ch == 'j' && posY < displayGrid.getHeight() - 1) {
                         movePlayer(posX, posY + 1);
-                    } else if (ch == 'd' && posX < displayGrid.getWidth() - 1) {
+                    } else if (ch == 'l' && posX < displayGrid.getWidth() - 1) {
                         movePlayer(posX + 1, posY);
                     }
                     if (DEBUG > 0) {
@@ -71,18 +83,48 @@ public class PlayerMover implements InputObserver, Runnable {
     }
 
     public void movePlayer(int posX2, int posY2) {
-        Char newPos = displayGrid.getObjectFromDisplay(posX2, posY2);
+        Object newPos = displayGrid.getObjectFromDisplay(posX2, posY2);
+        char newPosChar = ((Displayable) newPos).getChar();
         if (DEBUG > 0) {
             System.out.println("Moving player from " + Integer.toString(posX) + " " + Integer.toString(posY));
             System.out.println("To " + Integer.toString(posX2) + " " + Integer.toString(posY2));
         }
-        char newPosChar = newPos.getChar();
         if (newPosChar == '.' || newPosChar == '+' || newPosChar == '#') {
-            displayGrid.addObjectToDisplay(oldChar, posX, posY);
-            displayGrid.addObjectToDisplay(new Char('@'), posX2, posY2);
+            displayGrid.removeObjectFromDisplay(posX, posY);
+            displayGrid.addObjectToDisplay(player, posX2, posY2);
             posX = posX2;
             posY = posY2;
-            oldChar = new Char(newPosChar);
+        } else if (newPos instanceof Monster) {
+            attackMonster((Player)displayGrid.getObjectFromDisplay(posX, posY), (Monster)newPos);
+        }
+
+    }
+
+    public void attackMonster(Player player, Monster monster) {
+        // Player attacks monster
+        int playerDamage = random.nextInt(player.getMaxHit() + 1);
+        monster.setHp(monster.getHp() - playerDamage);
+        if (monster.getHp() <= 0) {
+            displayGrid.removeObjectFromDisplay(monster.getDispPosX(), monster.getDispPosY());
+            displayGrid.displayInfo("Player killed monster with attack for " + Integer.toString(playerDamage) + " damage!");
+        } else {
+            displayGrid.displayInfo("Player attacked monster for " + Integer.toString(playerDamage) + " damage!");
+            try { // delay monster attack
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            // Monster attacks player
+            int monsterDamage = random.nextInt(monster.getMaxHit() + 1);
+            player.setHp(player.getHp() - monsterDamage);
+            if (player.getHp() <= 0) {
+                displayGrid.removeObjectFromDisplay(player.getDispPosX(), player.getDispPosY());
+                displayGrid.displayInfo("Monster killed player with attack for " + Integer.toString(monsterDamage) + " damage!");
+                playerDead = true;
+            } else {
+                displayGrid.displayInfo("Monster attacked player for " + Integer.toString(monsterDamage) + " damage!");
+            }
+            displayGrid.displayHp(player.getHp());
         }
     }
 
