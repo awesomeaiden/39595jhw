@@ -29,4 +29,8 @@ public class Item extends Displayable {
         System.out.println("Setting ItemAction: " + ia);
         itemAction = ia;
     }
+
+    public String getName() {
+        return name;
+    }
 }

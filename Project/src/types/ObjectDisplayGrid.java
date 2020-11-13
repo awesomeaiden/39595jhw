@@ -123,11 +123,45 @@ public class ObjectDisplayGrid extends JFrame implements KeyListener, InputSubje
         }
     }
 
+    public void addItemToDisplay(Item item, int x, int y) {
+        if ((0 <= x) && (x < objectGrid.length)) {
+            if ((0 <= y) && (y < objectGrid[0].length)) {
+                item.setDispPosX(x);
+                item.setDispPosY(y);
+                Displayable keep = (Displayable) objectGrid[x][y].pop();
+                objectGrid[x][y].push(item);
+                objectGrid[x][y].push(keep);
+                writeToTerminal(x, y);
+            }
+        }
+    }
+
     public Displayable removeObjectFromDisplay(int x, int y) {
         if ((0 <= x) && (x < objectGrid.length)) {
             if ((0 <= y) && (y < objectGrid[0].length)) {
                 if (objectGrid[x][y].size() > 1) {
                     Displayable remove = (Displayable) objectGrid[x][y].pop();
+                    writeToTerminal(x, y);
+                    return remove;
+                }
+            }
+        }
+        return new Char(' ');
+    }
+
+    // As opposed to removeObjectFromDisplay, this method removes the item underneath the player
+    // so that the player can add it to its pack
+    public Object removeItemFromDisplay(int x, int y) {
+        Displayable keep = null;
+        Displayable remove = null;
+        if ((0 <= x) && (x < objectGrid.length)) {
+            if ((0 <= y) && (y < objectGrid[0].length)) {
+                if (objectGrid[x][y].size() > 1) {
+                    keep = (Displayable) objectGrid[x][y].pop();
+                    if (objectGrid[x][y].size() > 1) {
+                        remove = (Displayable) objectGrid[x][y].pop();
+                    }
+                    objectGrid[x][y].push(keep);
                     writeToTerminal(x, y);
                     return remove;
                 }
@@ -145,36 +179,57 @@ public class ObjectDisplayGrid extends JFrame implements KeyListener, InputSubje
         return new Char('0');
     }
 
+    public Item getItemFromDisplay(int x, int y) {
+        Item get = null;
+        if ((0 <= x) && (x < objectGrid.length)) {
+            if ((0 <= y) && (y < objectGrid[0].length)) {
+                if (objectGrid[x][y].size() > 1) {
+                    Displayable keep = (Displayable) objectGrid[x][y].pop();
+                    if (objectGrid[x][y].size() > 1) {
+                        get = (Item) objectGrid[x][y].peek();
+                    }
+                    objectGrid[x][y].push(keep);
+                    writeToTerminal(x, y);
+                }
+            }
+        }
+        return get;
+    }
+
     private void writeToTerminal(int x, int y) {
         char ch = ((Displayable)objectGrid[x][y].peek()).getChar();
         terminal.write(ch, x, y);
         terminal.repaint();
     }
 
+    public void displayPack(ArrayList<Item> pack) {
+        String packString = "Pack: ";
+        if (pack.size() > 0) {
+            int i;
+            for (i = 0; i < pack.size() - 1; i++) {
+                packString = packString + Integer.toString(i) + ": " + pack.get(i).getName() + ", ";
+            }
+            // Last item
+            packString = packString + Integer.toString(i) + ": " + pack.get(i).getName();
+        }
+        displayLine(packString, getHeight() - 3);
+    }
+
     public void displayInfo(String info) {
         String infoString = "Info: " + info;
-        int col;
-        for (col = 0; col < infoString.length(); col++) {
-            removeObjectFromDisplay(col, getHeight() - 1);
-            addObjectToDisplay(new Char(infoString.charAt(col)), col, getHeight() - 1);
-            try { // give asciipanel some time, fixes missing characters issue
-                Thread.sleep(3);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-        while (col < objectGrid.length) {
-            removeObjectFromDisplay(col, getHeight() - 1);
-            col++;
-        }
+        displayLine(infoString, getHeight() - 1);
     }
 
     public void displayHp(int hp) {
         String hpString = "HP: " + Integer.toString(hp);
+        displayLine(hpString, 0);
+    }
+
+    public void displayLine(String string, int yPos) {
         int col;
-        for (col = 0; col < hpString.length(); col++) {
-            removeObjectFromDisplay(col, 0);
-            addObjectToDisplay(new Char(hpString.charAt(col)), col, 0);
+        for (col = 0; col < string.length(); col++) {
+            removeObjectFromDisplay(col, yPos);
+            addObjectToDisplay(new Char(string.charAt(col)), col, yPos);
             try { // give asciipanel some time, fixes missing characters issue
                 Thread.sleep(3);
             } catch (InterruptedException e) {
@@ -182,7 +237,7 @@ public class ObjectDisplayGrid extends JFrame implements KeyListener, InputSubje
             }
         }
         while (col < objectGrid.length) {
-            removeObjectFromDisplay(col, 0);
+            removeObjectFromDisplay(col, yPos);
             col++;
         }
     }

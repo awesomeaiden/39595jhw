@@ -16,9 +16,12 @@ public class Displayable {
     private int dispPosY;
     private int width;
     private int height;
+    private static boolean DEBUG = false;
 
     public Displayable() {
-        System.out.println("Creating Displayable");
+        if (DEBUG) {
+            System.out.println("Creating Displayable");
+        }
     }
 
     public void setInvisible() {
@@ -67,12 +70,16 @@ public class Displayable {
     }
 
     public void setDispPosX(int dispPosX) {
-        System.out.println("Setting DispPosX: " + dispPosX);
+        if (DEBUG) {
+            System.out.println("Setting DispPosX: " + dispPosX);
+        }
         this.dispPosX = dispPosX;
     }
 
     public void setDispPosY(int dispPosY) {
-        System.out.println("setting DispPosY: " + dispPosY);
+        if (DEBUG) {
+            System.out.println("setting DispPosY: " + dispPosY);
+        }
         this.dispPosY = dispPosY;
     }
 

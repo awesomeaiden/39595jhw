@@ -191,6 +191,7 @@ public class Rogue implements Runnable {
 
         rogueThread.join();
         rogue.PlayerMover = new Thread(new PlayerMover(displayGrid, rogue.playerPosX, rogue.playerPosY, player));
+        System.out.println(dungeon);
         rogue.PlayerMover.start();
         rogue.PlayerMover.join();
     }

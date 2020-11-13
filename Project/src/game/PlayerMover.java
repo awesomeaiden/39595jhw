@@ -1,6 +1,7 @@
 package game;
 
 import types.Displayable;
+import types.Item;
 import types.Monster;
 import types.Player;
 
@@ -10,7 +11,7 @@ import java.util.Random;
 
 public class PlayerMover implements InputObserver, Runnable {
 
-    private static int DEBUG = 0;
+    private static int DEBUG = 1;
     private static String CLASSID = "PlayerMover";
     private static Queue<Character> inputQueue = null;
     private types.ObjectDisplayGrid displayGrid;
@@ -31,7 +32,7 @@ public class PlayerMover implements InputObserver, Runnable {
 
     @Override
     public void observerUpdate(char ch) {
-        if (DEBUG > 0) {
+        if (DEBUG > 1) {
             System.out.println(CLASSID + ".observerUpdate receiving character " + ch);
         }
         inputQueue.add(ch);
@@ -72,6 +73,15 @@ public class PlayerMover implements InputObserver, Runnable {
                         movePlayer(posX, posY + 1);
                     } else if (ch == 'l' && posX < displayGrid.getWidth() - 1) {
                         movePlayer(posX + 1, posY);
+                    } else if (ch == 'p') {
+                        pickupItem();
+                    } else if (ch == 'd') {
+                        dropItem(0);
+                    } else if (ch == 'i') {
+                        displayGrid.displayPack(player.getPack());
+                    } else if (48 <= ch && ch <= 57) {
+                        dropItem(ch - 48);
+                        displayGrid.displayPack(player.getPack());
                     }
                     if (DEBUG > 0) {
                         System.out.println("character " + ch + " entered on the keyboard");
@@ -82,22 +92,29 @@ public class PlayerMover implements InputObserver, Runnable {
         return true;
     }
 
+    private void pickupItem() {
+        if (displayGrid.getItemFromDisplay(player.getDispPosX(), player.getDispPosY()) instanceof Item) {
+            Item item = (Item)displayGrid.removeItemFromDisplay(player.getDispPosX(), player.getDispPosY());
+            player.addToPack(item);
+        }
+    }
+
+    private void dropItem(int index) {
+        Item item = player.removeFromPack(index);
+        displayGrid.addItemToDisplay(item, player.getDispPosX(), player.getDispPosY());
+    }
+
     public void movePlayer(int posX2, int posY2) {
         Object newPos = displayGrid.getObjectFromDisplay(posX2, posY2);
         char newPosChar = ((Displayable) newPos).getChar();
-        if (DEBUG > 0) {
-            System.out.println("Moving player from " + Integer.toString(posX) + " " + Integer.toString(posY));
-            System.out.println("To " + Integer.toString(posX2) + " " + Integer.toString(posY2));
-        }
-        if (newPosChar == '.' || newPosChar == '+' || newPosChar == '#') {
+        if (newPos instanceof Monster) {
+            attackMonster((Player)displayGrid.getObjectFromDisplay(posX, posY), (Monster)newPos);
+        } else if (newPosChar != 'X' && newPosChar != ' ') {
             displayGrid.removeObjectFromDisplay(posX, posY);
             displayGrid.addObjectToDisplay(player, posX2, posY2);
             posX = posX2;
             posY = posY2;
-        } else if (newPos instanceof Monster) {
-            attackMonster((Player)displayGrid.getObjectFromDisplay(posX, posY), (Monster)newPos);
         }
-
     }
 
     public void attackMonster(Player player, Monster monster) {
