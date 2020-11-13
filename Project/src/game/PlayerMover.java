@@ -81,7 +81,6 @@ public class PlayerMover implements InputObserver, Runnable {
                         displayGrid.displayPack(player.getPack());
                     } else if (48 <= ch && ch <= 57) {
                         dropItem(ch - 48);
-                        displayGrid.displayPack(player.getPack());
                     }
                     if (DEBUG > 0) {
                         System.out.println("character " + ch + " entered on the keyboard");

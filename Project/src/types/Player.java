@@ -15,11 +15,29 @@ public class Player extends Creature {
     public void setWeapon(Item sword) {
         System.out.println("Setting weapon: " + sword);
         weapon = sword;
+        boolean swordInPack = false;
+        for (int i = 0; i < pack.size(); i++) {
+            if (pack.get(i) instanceof Sword) {
+                swordInPack = true;
+            }
+        }
+        if (!swordInPack) {
+            addToPack(sword);
+        }
     }
 
     public void setArmor(Item armor) {
         System.out.println("Setting armor: " + armor);
         this.armor = armor;
+        boolean armorInPack = false;
+        for (int i = 0; i < pack.size(); i++) {
+            if (pack.get(i) instanceof Armor) {
+                armorInPack = true;
+            }
+        }
+        if (!armorInPack) {
+            addToPack(armor);
+        }
     }
 
     public void addToPack(Item item) {
