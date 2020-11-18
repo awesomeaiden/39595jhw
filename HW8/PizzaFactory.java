@@ -4,11 +4,11 @@ import java.lang.reflect.*;
 public class PizzaFactory {
 
    // used to translate pizza names to the corresponding pizza class
-   private static String[ ] pizzaClasses = {"NYStyleCheese", "NYStylePepperoni", "NYStyleClam", 
-                                            "ChicagoStyleCheese", "ChicagoStylePepperoni", 
-                                            "ChicagoStyleClam"};
-   private static String[ ] pizzaStrings = {"nycheese", "nypepperoni", "nyclam", 
-                                            "chicagocheese", "chicagopepperoni", "chicagoclam"};
+//   private static String[ ] pizzaClasses = {"NYStyleCheese", "NYStylePepperoni", "NYStyleClam",
+//                                            "ChicagoStyleCheese", "ChicagoStylePepperoni",
+//                                            "ChicagoStyleClam"};
+//   private static String[ ] pizzaStrings = {"nycheese", "nypepperoni", "nyclam",
+//                                            "chicagocheese", "chicagopepperoni", "chicagoclam"};
 
    private static Map<String,String> pizzaMap = new HashMap<String,String>( );
 
@@ -38,12 +38,15 @@ public class PizzaFactory {
              (e.g., a NYCheesePizza), get the constructor for that pizza, where
              the constructor takes a PizzaIngredients reference as an argument,
              and then create an instance of that pizza using the constructor and
-             ingredients, which was passed in.  
+             ingredients, which was passed in.
 
              The pizzaMap allows you to go from the pizza name passed in, i.e.,
              "nycheese", to the actual class name, i.e., "NYStyleCheese".  You
              will use it to get the name to pass to Class.forName(String).
             */
+            Class<?> cls = Class.forName(pizzaMap.get(pizzaName));
+            Constructor<?> constructor = cls.getConstructor(PizzaIngredients.class);
+            pizza = (Pizza) constructor.newInstance(ingredients);
          } catch (Exception e) {
             System.out.println("Exception in PizzaFactory: "+pizzaName);
             e.printStackTrace( );
