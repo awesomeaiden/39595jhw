@@ -7,4 +7,10 @@ public abstract class CreatureAction extends Action {
         System.out.println("Creating CreatureAction: " + _owner);
         owner = _owner;
     }
+
+    public Creature getOwner() {
+        return owner;
+    }
+
+    abstract public void activate(ObjectDisplayGrid odg);
 }

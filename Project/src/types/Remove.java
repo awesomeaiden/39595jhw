@@ -10,7 +10,7 @@ public class Remove extends CreatureAction {
     }
 
     @Override
-    public void activate() {
-        return;
+    public void activate(ObjectDisplayGrid odg) {
+        odg.removeItemFromDisplay(getOwner().getDispPosX(), getOwner().getDispPosY());
     }
 }

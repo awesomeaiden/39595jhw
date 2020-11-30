@@ -1,6 +1,7 @@
 package types;
 import game.MoveObserver;
-import java.util.Random;
+import game.PlayerMover;
+
 import java.util.ArrayList;
 
 public class Player extends Creature implements MoveObserver  {
@@ -8,11 +9,11 @@ public class Player extends Creature implements MoveObserver  {
     private Armor armor;
     private ArrayList<Item> pack;
     private int moves = 0;
-    private Random random = new Random();
 
     public Player() {
         System.out.println("Creating a Player");
         pack = new ArrayList<Item>();
+        setType('@');
     }
 
     @Override
@@ -33,12 +34,24 @@ public class Player extends Creature implements MoveObserver  {
         }
     }
 
+    public void setSwordDamage(int val) {
+        if (weaponEquipped()) {
+            weapon.setIntValue(val);
+        }
+    }
+
     @Override
     public int getArmorVal() {
         if (armorEquipped()) {
             return armor.getIntValue();
         } else {
             return 0;
+        }
+    }
+
+    public void setArmorVal(int val) {
+        if (armorEquipped()) {
+            armor.setIntValue(val);
         }
     }
 
@@ -74,11 +87,11 @@ public class Player extends Creature implements MoveObserver  {
         }
     }
 
-    public boolean readScroll(int _scroll) {
+    public boolean readScroll(int _scroll, ObjectDisplayGrid odg, PlayerMover pm) {
         Item scroll = getFromPack(_scroll);
         if (scroll instanceof Scroll) {
             for (ItemAction action : scroll.getActions()) {
-                action.activate();
+                action.activate(this, odg, pm);
             }
             return true;
         }
@@ -115,11 +128,6 @@ public class Player extends Creature implements MoveObserver  {
         }
     }
 
-    @Override
-    public char getChar() {
-        return '@';
-    }
-
     public ArrayList<Item> getPack() {
         return pack;
     }
@@ -146,5 +154,13 @@ public class Player extends Creature implements MoveObserver  {
 
     public boolean packEmpty() {
         return (pack.size() == 0);
+    }
+
+    public Armor getArmor() {
+        return armor;
+    }
+
+    public Item getWeapon() {
+        return weapon;
     }
 }

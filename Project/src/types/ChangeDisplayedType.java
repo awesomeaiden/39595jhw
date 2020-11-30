@@ -10,7 +10,8 @@ public class ChangeDisplayedType extends CreatureAction {
     }
 
     @Override
-    public void activate() {
-        return;
+    public void activate(ObjectDisplayGrid odg) {
+        getOwner().setType(getCharValue());
+        odg.writeToTerminal(getOwner().getDispPosX(), getOwner().getDispPosY());
     }
 }

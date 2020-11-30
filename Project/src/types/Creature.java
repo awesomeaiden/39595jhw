@@ -50,18 +50,18 @@ public class Creature extends Displayable {
         return 0;
     }
 
-    public int hit(Creature victim) {
+    public int hit(Creature victim, ObjectDisplayGrid odg) {
         int damage = random.nextInt(getMaxHit() + 1) + getSwordDamage() - victim.getArmorVal();
         victim.setHp(victim.getHp() - damage);
         for (CreatureAction action : victim.hitActions) {
-            action.activate();
+            action.activate(odg);
         }
         return damage;
     }
 
-    public void die() {
+    public void die(ObjectDisplayGrid odg) {
         for (CreatureAction action : deathActions) {
-            action.activate();
+            action.activate(odg);
         }
     }
 }

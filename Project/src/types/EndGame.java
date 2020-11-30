@@ -10,7 +10,7 @@ public class EndGame extends CreatureAction {
     }
 
     @Override
-    public void activate() {
-        return;
+    public void activate(ObjectDisplayGrid odg) {
+        odg.setGameOver(true);
     }
 }

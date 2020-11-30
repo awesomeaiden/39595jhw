@@ -10,7 +10,8 @@ public class DropPack extends CreatureAction {
     }
 
     @Override
-    public void activate() {
-        return;
+    public void activate(ObjectDisplayGrid odg) {
+        Player player = (Player) getOwner();
+        player.removeFromPack(0);
     }
 }

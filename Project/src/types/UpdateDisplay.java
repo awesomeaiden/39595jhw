@@ -10,7 +10,10 @@ public class UpdateDisplay extends CreatureAction {
     }
 
     @Override
-    public void activate() {
-        return;
+    public void activate(ObjectDisplayGrid odg) {
+        odg.writeToTerminal(getOwner().getDispPosX(), getOwner().getDispPosY());
+        if (getOwner() instanceof Player) {
+            odg.displayHp(getOwner().getHp());
+        }
     }
 }

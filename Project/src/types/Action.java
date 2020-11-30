@@ -1,6 +1,6 @@
 package types;
 
-public abstract class Action {
+public class Action {
     private String msg;
     private int ival;
     private char cval;
@@ -12,6 +12,10 @@ public abstract class Action {
     public void setMessage(String msg) {
         System.out.println("Setting action message: " + msg);
         this.msg = msg;
+    }
+
+    public String getMessage() {
+        return msg;
     }
 
     public void setIntValue(int ival) {
@@ -28,5 +32,7 @@ public abstract class Action {
         this.cval = cval;
     }
 
-    abstract public void activate();
+    public char getCharValue() {
+        return cval;
+    }
 }

@@ -18,6 +18,9 @@ public class Displayable {
     private int height;
     private static boolean DEBUG = false;
 
+    private boolean hallucinate = false;
+    private char hChar = 'X';
+
     public Displayable() {
         if (DEBUG) {
             System.out.println("Creating Displayable");
@@ -142,6 +145,22 @@ public class Displayable {
     }
 
     public char getChar() {
-        return getType();
+        if (hallucinate) {
+            return getHChar();
+        } else {
+            return getType();
+        }
+    }
+
+    public void setHallucinate(boolean val) {
+        hallucinate = val;
+    }
+
+    public void setHChar(char _hChar) {
+        hChar = _hChar;
+    }
+
+    public char getHChar() {
+        return hChar;
     }
 }

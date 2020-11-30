@@ -5,7 +5,8 @@ public class Armor extends Item {
 
     public Armor(String _name) {
         System.out.println("Creating armor: " + _name);
-        this.setName(_name);
+        setName(_name);
+        setType(']');
     }
 
     public void setEquipped(boolean val) {
@@ -21,10 +22,5 @@ public class Armor extends Item {
         displayName += super.getName();
         displayName += " [" + Integer.toString(getIntValue()) + "]";
         return displayName;
-    }
-
-    @Override
-    public char getChar() {
-        return ']';
     }
 }

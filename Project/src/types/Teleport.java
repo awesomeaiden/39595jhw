@@ -1,5 +1,7 @@
 package types;
 
+import java.util.ArrayList;
+
 public class Teleport extends CreatureAction {
     private String name;
 
@@ -10,7 +12,8 @@ public class Teleport extends CreatureAction {
     }
 
     @Override
-    public void activate() {
-        return;
+    public void activate(ObjectDisplayGrid odg) {
+        Displayable space = odg.getTeleportSpace();
+        odg.addObjectToDisplay(odg.removeObjectFromDisplay(getOwner().getDispPosX(), getOwner().getDispPosY()), space.getDispPosX(), space.getDispPosY());
     }
 }

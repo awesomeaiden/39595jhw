@@ -44,6 +44,10 @@ public class PlayerMover implements InputObserver, MoveSubject, Runnable {
         moveObservers.add(observer);
     }
 
+    public void removeMoveObserver(MoveObserver observer) {
+        moveObservers.remove(observer);
+    }
+
     private void notifyMoveObservers(int moves) {
         for (MoveObserver observer : moveObservers) {
             observer.observerUpdate(moves);
@@ -111,7 +115,7 @@ public class PlayerMover implements InputObserver, MoveSubject, Runnable {
                     } else if (readMode) {
                         if (48 <= ch && ch <= 57) {
                             displayGrid.displayInfo("Scroll activated!");
-                            player.readScroll(ch - 49);
+                            player.readScroll(ch - 49, displayGrid, this);
                         }
                         readMode = false;
                     } else if (takeMode) {
@@ -217,10 +221,10 @@ public class PlayerMover implements InputObserver, MoveSubject, Runnable {
     public void movePlayer(int posX2, int posY2) {
         Object newPos = displayGrid.getObjectFromDisplay(posX2, posY2);
         char newPosChar = ((Displayable) newPos).getChar();
+        notifyMoveObservers(1);
         if (newPos instanceof Monster) {
             attackMonster((Player)displayGrid.getObjectFromDisplay(posX, posY), (Monster)newPos);
         } else if (newPosChar != 'X' && newPosChar != ' ') {
-            notifyMoveObservers(1);
             displayGrid.displayHp(player.getHp());
             displayGrid.removeObjectFromDisplay(posX, posY);
             displayGrid.addObjectToDisplay(player, posX2, posY2);
@@ -231,9 +235,9 @@ public class PlayerMover implements InputObserver, MoveSubject, Runnable {
 
     public void attackMonster(Player player, Monster monster) {
         // Player attacks monster
-        int playerDamage = player.hit(monster);
+        int playerDamage = player.hit(monster, displayGrid);
         if (monster.getHp() <= 0) {
-            monster.die();
+            monster.die(displayGrid);
             displayGrid.removeObjectFromDisplay(monster.getDispPosX(), monster.getDispPosY());
             displayGrid.displayInfo("Player killed monster with attack for " + Integer.toString(playerDamage) + " damage!");
         } else {
@@ -244,9 +248,9 @@ public class PlayerMover implements InputObserver, MoveSubject, Runnable {
                 e.printStackTrace();
             }
             // Monster attacks player
-            int monsterDamage = monster.hit(player);
+            int monsterDamage = monster.hit(player, displayGrid);
             if (player.getHp() <= 0) {
-                player.die();
+                player.die(displayGrid);
                 displayGrid.removeObjectFromDisplay(player.getDispPosX(), player.getDispPosY());
                 displayGrid.displayInfo("Monster killed player with attack for " + Integer.toString(monsterDamage) + " damage!");
                 playerDead = true;
@@ -266,4 +270,5 @@ public class PlayerMover implements InputObserver, MoveSubject, Runnable {
             working = (processInput( ));
         }
     }
+
 }

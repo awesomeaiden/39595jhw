@@ -5,7 +5,8 @@ public class Sword extends Item {
 
     public Sword(String _name) {
         System.out.println("Creating a Sword: " + _name);
-        this.setName(_name);
+        setName(_name);
+        setType(')');
     }
 
     public void setEquipped(boolean val) {
@@ -21,10 +22,5 @@ public class Sword extends Item {
         displayName += super.getName();
         displayName += " [" + Integer.toString(getIntValue()) + "]";
         return displayName;
-    }
-
-    @Override
-    public char getChar() {
-        return ')';
     }
 }

@@ -11,6 +11,7 @@ import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
+import java.util.Random;
 
 import static java.lang.Math.round;
 
@@ -30,6 +31,12 @@ public class ObjectDisplayGrid extends JFrame implements KeyListener, InputSubje
     private Stack[][] objectGrid;
 
     private List<InputObserver> inputObservers = null;
+    private boolean gameOver = false;
+
+    private Random random = new Random();
+
+    private ArrayList<Char> hallucinateChars = new ArrayList<Char>();
+    ArrayList<Displayable> hallucinateSpaces = new ArrayList<Displayable>();
 
     private ObjectDisplayGrid(int _gameHeight, int _width, int _topHeight, int _bottomHeight) {
         System.out.println("Creating an ObjectDisplayGrid: " + _gameHeight + _width + _topHeight + _bottomHeight);
@@ -57,6 +64,35 @@ public class ObjectDisplayGrid extends JFrame implements KeyListener, InputSubje
         super.addKeyListener(this);
         inputObservers = new ArrayList<>();
         super.repaint();
+
+        initializeHallucinateChars();
+    }
+
+    private void initializeHallucinateChars() {
+        hallucinateChars.add(new Char('.'));
+        hallucinateChars.add(new Char('#'));
+        hallucinateChars.add(new Char('+'));
+        hallucinateChars.add(new Char('X'));
+        hallucinateChars.add(new Char(']'));
+        hallucinateChars.add(new Char(')'));
+        hallucinateChars.add(new Char('?'));
+        hallucinateChars.add(new Char('T'));
+        hallucinateChars.add(new Char('S'));
+        hallucinateChars.add(new Char('@'));
+    }
+
+    public void initializeHallucinateSpaces() {
+        Displayable space = null;
+        char spaceChar;
+        for (int x = 0; x < objectGrid.length; x++) {
+            for (int y = 0; y < objectGrid[0].length; y++) {
+                space = getObjectFromDisplay(x, y);
+                spaceChar = space.getChar();
+                if (hCharsContains(spaceChar)) {
+                    hallucinateSpaces.add(space);
+                }
+            }
+        }
     }
 
     @Override
@@ -77,12 +113,18 @@ public class ObjectDisplayGrid extends JFrame implements KeyListener, InputSubje
     }
 
     private void notifyInputObservers(char ch) {
-        for (InputObserver observer : inputObservers) {
-            observer.observerUpdate(ch);
-            if (DEBUG > 0) {
-                System.out.println(CLASSID + ".notifyInputObserver " + ch);
+        if (!gameOver) {
+            for (InputObserver observer : inputObservers) {
+                observer.observerUpdate(ch);
+                if (DEBUG > 0) {
+                    System.out.println(CLASSID + ".notifyInputObserver " + ch);
+                }
             }
         }
+    }
+
+    public void setGameOver(boolean val) {
+        gameOver = val;
     }
 
     // we have to override, but we don't use this
@@ -196,7 +238,7 @@ public class ObjectDisplayGrid extends JFrame implements KeyListener, InputSubje
         return get;
     }
 
-    private void writeToTerminal(int x, int y) {
+    public void writeToTerminal(int x, int y) {
         char ch = ((Displayable)objectGrid[x][y].peek()).getChar();
         terminal.write(ch, x, y);
         terminal.repaint();
@@ -247,6 +289,36 @@ public class ObjectDisplayGrid extends JFrame implements KeyListener, InputSubje
         }
     }
 
+    public boolean hCharsContains(char spaceChar) {
+        for (Char hChar : hallucinateChars) {
+            if (hChar.getChar() == spaceChar) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public Char getRandHChar() {
+        return hallucinateChars.get(random.nextInt(hallucinateChars.size()));
+    }
+
+    public void hallucinate() {
+        for (Displayable changeSpace : hallucinateSpaces) {
+            changeSpace.setHallucinate(true);
+            char newChar = getRandHChar().getChar();
+            changeSpace.setHChar(newChar);
+            terminal.write(newChar, changeSpace.getDispPosX(), changeSpace.getDispPosY());
+            terminal.repaint();
+        }
+    }
+
+    public void stopHallucinate() {
+        for (Displayable changeSpace : hallucinateSpaces) {
+            changeSpace.setHallucinate(false);
+            writeToTerminal(changeSpace.getDispPosX(), changeSpace.getDispPosY());
+        }
+    }
+
     // Used by code outside the class to get a dungeon
     public static ObjectDisplayGrid getObjectDisplayGrid(int gameHeight, int width, int topHeight, int bottomHeight) throws Exception {
         System.out.println("Getting an ObjectDisplayGrid...");
@@ -291,5 +363,21 @@ public class ObjectDisplayGrid extends JFrame implements KeyListener, InputSubje
 
     public int getBottomHeight() {
         return bottomHeight;
+    }
+
+    public Displayable getTeleportSpace() {
+        ArrayList<Displayable> spaces = new ArrayList<Displayable>();
+        Displayable space = null;
+        char spaceChar;
+        for (int x = 0; x < objectGrid.length; x++) {
+            for (int y = 0; y < objectGrid[0].length; y++) {
+                space = getObjectFromDisplay(x, y);
+                spaceChar = space.getChar();
+                if (spaceChar == '.' || spaceChar == '#' || spaceChar == '+') {
+                    spaces.add(space);
+                }
+            }
+        }
+        return spaces.get(random.nextInt(spaces.size()));
     }
 }
