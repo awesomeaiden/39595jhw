@@ -1,6 +1,6 @@
 package types;
 
-public class ItemAction extends Action {
+public abstract class ItemAction extends Action {
     private Item owner;
 
     public ItemAction(Item _owner) {

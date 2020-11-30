@@ -5,4 +5,8 @@ public class BlessCurseOwner extends ItemAction {
         super(_owner);
         System.out.println("Creating BlessCurseOwner: " + _owner);
     }
+
+    @Override
+    public void activate() {
+    }
 }

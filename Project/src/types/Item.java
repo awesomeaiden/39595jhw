@@ -2,11 +2,13 @@ package types;
 
 import game.MoveObserver;
 
+import java.util.ArrayList;
+
 public class Item extends Displayable {
-    private String name;
-    private String id;
-    private ItemAction itemAction;
-    private int intValue;
+    private String name = "";
+    private String id = "";
+    private ArrayList<ItemAction> itemActions = new ArrayList<ItemAction>();
+    private int intValue = 0;
 
     public Item() {
         System.out.println("Creating an Item");
@@ -15,6 +17,10 @@ public class Item extends Displayable {
     public void setIntValue(int intval) {
         System.out.println("Setting intValue: " + intval);
         intValue = intval;
+    }
+
+    public int getIntValue() {
+        return intValue;
     }
 
     public void setName(String name) {
@@ -27,16 +33,16 @@ public class Item extends Displayable {
         id = room + "-" + serial;
     }
 
-    public void setAction(ItemAction ia) {
-        System.out.println("Setting ItemAction: " + ia);
-        itemAction = ia;
+    public void addAction(ItemAction ia) {
+        System.out.println("Adding ItemAction: " + ia);
+        itemActions.add(ia);
     }
 
     public String getName() {
         return name;
     }
 
-    public ItemAction getAction() {
-        return itemAction;
+    public ArrayList<ItemAction> getActions() {
+        return itemActions;
     }
 }

@@ -7,6 +7,4 @@ public abstract class CreatureAction extends Action {
         System.out.println("Creating CreatureAction: " + _owner);
         owner = _owner;
     }
-
-    abstract public void activate();
 }

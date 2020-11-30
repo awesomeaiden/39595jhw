@@ -5,4 +5,8 @@ public class BlessArmor extends ItemAction {
         super(_owner);
         System.out.println("Creating BlessArmor: " + _owner);
     }
+
+    @Override
+    public void activate() {
+    }
 }

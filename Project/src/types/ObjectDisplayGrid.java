@@ -207,10 +207,10 @@ public class ObjectDisplayGrid extends JFrame implements KeyListener, InputSubje
         if (pack.size() > 0) {
             int i;
             for (i = 0; i < pack.size() - 1; i++) {
-                packString = packString + Integer.toString(i) + ": " + pack.get(i).getName() + ", ";
+                packString = packString + Integer.toString(i + 1) + ": " + pack.get(i).getName() + ", ";
             }
             // Last item
-            packString = packString + Integer.toString(i) + ": " + pack.get(i).getName();
+            packString = packString + Integer.toString(i + 1) + ": " + pack.get(i).getName();
         }
         displayLine(packString, getHeight() - 3);
     }

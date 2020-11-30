@@ -18,4 +18,8 @@ public class Hallucinate extends ItemAction implements MoveObserver {
             active = false;
         }
     }
+
+    @Override
+    public void activate() {
+    }
 }

@@ -167,9 +167,9 @@ public class DungeonXMLHandler extends DefaultHandler {
                 roomBeingParsed.addItem(item);
             } else if (displayableBeingParsed.peek() instanceof Player) {
                 if (itemBeingParsed instanceof Sword) {
-                    ((Player) creatureBeingParsed).setWeapon(itemBeingParsed);
+                    ((Player) creatureBeingParsed).setWeapon(((Player) creatureBeingParsed).addToPack(itemBeingParsed) - 1);
                 } else if (itemBeingParsed instanceof Armor) {
-                    ((Player) creatureBeingParsed).setArmor(itemBeingParsed);
+                    ((Player) creatureBeingParsed).setArmor(((Player) creatureBeingParsed).addToPack(itemBeingParsed) - 1);
                 }
             }
 
@@ -209,7 +209,7 @@ public class DungeonXMLHandler extends DefaultHandler {
                 } else if (name.equals("Hallucinate")) {
                     action = new Hallucinate(itemBeingParsed);
                 }
-                itemBeingParsed.setAction((ItemAction) action);
+                itemBeingParsed.addAction((ItemAction) action);
             }
             actionBeingParsed = action;
         } else if (qName.equalsIgnoreCase("visible")) {

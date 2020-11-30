@@ -1,8 +1,6 @@
 package types;
 
-import game.MoveObserver;
 import java.util.Random;
-
 import java.util.ArrayList;
 
 public class Creature extends Displayable {
@@ -36,10 +34,26 @@ public class Creature extends Displayable {
         hitActions.add(ha);
     }
 
-    public int hit(Creature by) {
-        int damage = random.nextInt(by.getMaxHit() + 1);
-        setHp(getHp() - damage);
-        for (CreatureAction action : hitActions) {
+    public ArrayList<CreatureAction> getDeathActions() {
+        return deathActions;
+    }
+
+    public ArrayList<CreatureAction> getHitActions() {
+        return hitActions;
+    }
+
+    public int getSwordDamage() {
+        return 0;
+    }
+
+    public int getArmorVal() {
+        return 0;
+    }
+
+    public int hit(Creature victim) {
+        int damage = random.nextInt(getMaxHit() + 1) + getSwordDamage() - victim.getArmorVal();
+        victim.setHp(victim.getHp() - damage);
+        for (CreatureAction action : victim.hitActions) {
             action.activate();
         }
         return damage;

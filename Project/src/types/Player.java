@@ -1,14 +1,14 @@
 package types;
-import game.InputObserver;
 import game.MoveObserver;
-
+import java.util.Random;
 import java.util.ArrayList;
 
 public class Player extends Creature implements MoveObserver  {
-    private Item weapon;
-    private Item armor;
+    private Sword weapon;
+    private Armor armor;
     private ArrayList<Item> pack;
     private int moves = 0;
+    private Random random = new Random();
 
     public Player() {
         System.out.println("Creating a Player");
@@ -24,42 +24,95 @@ public class Player extends Creature implements MoveObserver  {
         }
     }
 
-    public void setWeapon(Item sword) {
-        System.out.println("Setting weapon: " + sword);
-        weapon = sword;
-        boolean swordInPack = false;
-        for (int i = 0; i < pack.size(); i++) {
-            if (pack.get(i) instanceof Sword) {
-                swordInPack = true;
-            }
-        }
-        if (!swordInPack) {
-            addToPack(sword);
+    @Override
+    public int getSwordDamage() {
+        if (weaponEquipped()) {
+            return weapon.getIntValue();
+        } else {
+            return 0;
         }
     }
 
-    public void setArmor(Item armor) {
-        System.out.println("Setting armor: " + armor);
-        this.armor = armor;
-        boolean armorInPack = false;
-        for (int i = 0; i < pack.size(); i++) {
-            if (pack.get(i) instanceof Armor) {
-                armorInPack = true;
-            }
-        }
-        if (!armorInPack) {
-            addToPack(armor);
+    @Override
+    public int getArmorVal() {
+        if (armorEquipped()) {
+            return armor.getIntValue();
+        } else {
+            return 0;
         }
     }
 
-    public void addToPack(Item item) {
-        pack.add(item);
+    public boolean weaponEquipped() {
+        return (weapon != null);
+    }
+
+    public boolean armorEquipped() {
+        return (armor != null);
+    }
+
+    public boolean setWeapon(int sword) {
+        System.out.println("Setting weapon...");
+        Item newSword = getFromPack(sword);
+        if (newSword instanceof Sword) {
+            weapon = (Sword) newSword;
+            weapon.setEquipped(true);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean setArmor(int _armor) {
+        System.out.println("Setting armor...");
+        Item newArmor = getFromPack(_armor);
+        if (newArmor instanceof Armor) {
+            armor = (Armor) newArmor;
+            armor.setEquipped(true);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean readScroll(int _scroll) {
+        Item scroll = getFromPack(_scroll);
+        if (scroll instanceof Scroll) {
+            for (ItemAction action : scroll.getActions()) {
+                action.activate();
+            }
+            return true;
+        }
+        return false;
+    }
+
+    public int addToPack(Item item) {
+        if (pack.size() < 9) {
+            pack.add(item);
+            return pack.size();
+        } else {
+            return -1;
+        }
     }
 
     public Item removeFromPack(int index) {
-        Item removed = pack.get(index);
-        pack.remove(index);
+        Item removed = getFromPack(index);
+        if (removed != null) {
+            if (removed instanceof Sword) {
+                changeWeapon();
+            } else if (removed instanceof Armor) {
+                changeArmor();
+            }
+            pack.remove(index);
+        }
         return removed;
+    }
+
+    public Item getFromPack(int index) {
+        if (pack.size() > index && index >= 0) {
+            return pack.get(index);
+        } else {
+            return null;
+        }
     }
 
     @Override
@@ -69,5 +122,29 @@ public class Player extends Creature implements MoveObserver  {
 
     public ArrayList<Item> getPack() {
         return pack;
+    }
+
+    public boolean changeArmor() {
+        if (armorEquipped()) {
+            armor.setEquipped(false);
+            armor = null;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean changeWeapon() {
+        if (weaponEquipped()) {
+            weapon.setEquipped(false);
+            weapon = null;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean packEmpty() {
+        return (pack.size() == 0);
     }
 }
