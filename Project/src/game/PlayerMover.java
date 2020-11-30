@@ -1,15 +1,12 @@
 package game;
 
-import types.Displayable;
-import types.Item;
-import types.Monster;
-import types.Player;
+import types.*;
 
+import java.util.ArrayList;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.Random;
 
-public class PlayerMover implements InputObserver, Runnable {
+public class PlayerMover implements InputObserver, MoveSubject, Runnable {
 
     private static int DEBUG = 1;
     private static String CLASSID = "PlayerMover";
@@ -17,10 +14,9 @@ public class PlayerMover implements InputObserver, Runnable {
     private types.ObjectDisplayGrid displayGrid;
     private int posX;
     private int posY;
-    private Char oldChar = new Char('.');
-    private Random random = new Random();
     private Player player;
     private boolean playerDead = false;
+    private ArrayList<MoveObserver> moveObservers = new ArrayList<MoveObserver>();
 
     public PlayerMover(types.ObjectDisplayGrid grid, int _posX, int _posY, Player _player) {
         inputQueue = new ConcurrentLinkedQueue<>();
@@ -28,6 +24,7 @@ public class PlayerMover implements InputObserver, Runnable {
         posX = _posX;
         posY = _posY;
         player = _player;
+        registerMoveObserver(player);
     }
 
     @Override
@@ -36,6 +33,17 @@ public class PlayerMover implements InputObserver, Runnable {
             System.out.println(CLASSID + ".observerUpdate receiving character " + ch);
         }
         inputQueue.add(ch);
+    }
+
+    @Override
+    public void registerMoveObserver(MoveObserver observer) {
+        moveObservers.add(observer);
+    }
+
+    private void notifyMoveObservers(int moves) {
+        for (MoveObserver observer : moveObservers) {
+            observer.observerUpdate(moves);
+        }
     }
 
     private void rest() {
@@ -95,6 +103,9 @@ public class PlayerMover implements InputObserver, Runnable {
         if (displayGrid.getItemFromDisplay(player.getDispPosX(), player.getDispPosY()) instanceof Item) {
             Item item = (Item)displayGrid.removeItemFromDisplay(player.getDispPosX(), player.getDispPosY());
             player.addToPack(item);
+            if (item.getAction() instanceof Hallucinate) {
+                registerMoveObserver((Hallucinate)item.getAction());
+            }
         }
     }
 
@@ -109,6 +120,8 @@ public class PlayerMover implements InputObserver, Runnable {
         if (newPos instanceof Monster) {
             attackMonster((Player)displayGrid.getObjectFromDisplay(posX, posY), (Monster)newPos);
         } else if (newPosChar != 'X' && newPosChar != ' ') {
+            notifyMoveObservers(1);
+            displayGrid.displayHp(player.getHp());
             displayGrid.removeObjectFromDisplay(posX, posY);
             displayGrid.addObjectToDisplay(player, posX2, posY2);
             posX = posX2;
@@ -118,9 +131,9 @@ public class PlayerMover implements InputObserver, Runnable {
 
     public void attackMonster(Player player, Monster monster) {
         // Player attacks monster
-        int playerDamage = random.nextInt(player.getMaxHit() + 1);
-        monster.setHp(monster.getHp() - playerDamage);
+        int playerDamage = monster.hit(player);
         if (monster.getHp() <= 0) {
+            monster.die();
             displayGrid.removeObjectFromDisplay(monster.getDispPosX(), monster.getDispPosY());
             displayGrid.displayInfo("Player killed monster with attack for " + Integer.toString(playerDamage) + " damage!");
         } else {
@@ -131,9 +144,9 @@ public class PlayerMover implements InputObserver, Runnable {
                 e.printStackTrace();
             }
             // Monster attacks player
-            int monsterDamage = random.nextInt(monster.getMaxHit() + 1);
-            player.setHp(player.getHp() - monsterDamage);
+            int monsterDamage = player.hit(monster);
             if (player.getHp() <= 0) {
+                player.die();
                 displayGrid.removeObjectFromDisplay(player.getDispPosX(), player.getDispPosY());
                 displayGrid.displayInfo("Monster killed player with attack for " + Integer.toString(monsterDamage) + " damage!");
                 playerDead = true;

@@ -222,10 +222,10 @@ public class ObjectDisplayGrid extends JFrame implements KeyListener, InputSubje
 
     public void displayHp(int hp) {
         String hpString = "HP: " + Integer.toString(hp);
-        displayLine(hpString, 0);
+        displayWord(hpString, 0);
     }
 
-    public void displayLine(String string, int yPos) {
+    public int displayWord(String string, int yPos) {
         int col;
         for (col = 0; col < string.length(); col++) {
             removeObjectFromDisplay(col, yPos);
@@ -236,6 +236,11 @@ public class ObjectDisplayGrid extends JFrame implements KeyListener, InputSubje
                 e.printStackTrace();
             }
         }
+        return col;
+    }
+
+    public void displayLine(String string, int yPos) {
+        int col = displayWord(string, yPos);
         while (col < objectGrid.length) {
             removeObjectFromDisplay(col, yPos);
             col++;

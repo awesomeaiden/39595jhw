@@ -8,4 +8,9 @@ public class ChangeDisplayedType extends CreatureAction {
         System.out.println("Creating ChangedDisplayType: " + _name + _owner);
         name = _name;
     }
+
+    @Override
+    public void activate() {
+        return;
+    }
 }

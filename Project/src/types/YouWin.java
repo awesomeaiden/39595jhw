@@ -8,4 +8,9 @@ public class YouWin extends CreatureAction {
         System.out.println("Creating a YouWin: " + _name + _owner);
         name = _name;
     }
+
+    @Override
+    public void activate() {
+        return;
+    }
 }

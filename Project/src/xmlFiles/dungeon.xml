@@ -34,7 +34,7 @@
        </Room>
        <Room room="2">
            <posX>20</posX>
-           <posY>30</posY>
+           <posY>28</posY>
            <width>10</width>
            <height>12</height>
            <Monster name="Troll" room="2" serial="1">

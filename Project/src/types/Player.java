@@ -1,15 +1,27 @@
 package types;
+import game.InputObserver;
+import game.MoveObserver;
 
 import java.util.ArrayList;
 
-public class Player extends Creature {
+public class Player extends Creature implements MoveObserver  {
     private Item weapon;
     private Item armor;
     private ArrayList<Item> pack;
+    private int moves = 0;
 
     public Player() {
         System.out.println("Creating a Player");
         pack = new ArrayList<Item>();
+    }
+
+    @Override
+    public void observerUpdate(int _moves) {
+        moves += _moves;
+        if (moves >= getHpMoves()) {
+            setHp(getHp() + 1);
+            moves -= getHpMoves();
+        }
     }
 
     public void setWeapon(Item sword) {

@@ -8,4 +8,9 @@ public class DropPack extends CreatureAction {
         System.out.println("Creating DropPack: " + _name + _owner);
         name = _name;
     }
+
+    @Override
+    public void activate() {
+        return;
+    }
 }

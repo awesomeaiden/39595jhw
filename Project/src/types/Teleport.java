@@ -8,4 +8,9 @@ public class Teleport extends CreatureAction {
         System.out.println("Creating a Teleport: " + _name + _owner);
         name = _name;
     }
+
+    @Override
+    public void activate() {
+        return;
+    }
 }

@@ -19,6 +19,10 @@ public class Action {
         this.ival = ival;
     }
 
+    public int getIntValue() {
+        return ival;
+    }
+
     public void setCharValue(char cval) {
         System.out.println("Setting action charvalue: " + cval);
         this.cval = cval;

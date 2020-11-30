@@ -8,4 +8,9 @@ public class UpdateDisplay extends CreatureAction {
         System.out.println("Creating an UpdateDisplay: " + _name + _owner);
         name = _name;
     }
+
+    @Override
+    public void activate() {
+        return;
+    }
 }

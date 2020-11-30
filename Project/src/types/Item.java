@@ -1,5 +1,7 @@
 package types;
 
+import game.MoveObserver;
+
 public class Item extends Displayable {
     private String name;
     private String id;
@@ -32,5 +34,9 @@ public class Item extends Displayable {
 
     public String getName() {
         return name;
+    }
+
+    public ItemAction getAction() {
+        return itemAction;
     }
 }

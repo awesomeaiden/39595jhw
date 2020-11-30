@@ -8,4 +8,9 @@ public class Remove extends CreatureAction {
         System.out.println("Creating a Remove: " + _name + _owner);
         name = _name;
     }
+
+    @Override
+    public void activate() {
+        return;
+    }
 }
