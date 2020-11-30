@@ -78,6 +78,7 @@ public class ObjectDisplayGrid extends JFrame implements KeyListener, InputSubje
         hallucinateChars.add(new Char('?'));
         hallucinateChars.add(new Char('T'));
         hallucinateChars.add(new Char('S'));
+        hallucinateChars.add(new Char('H'));
         hallucinateChars.add(new Char('@'));
     }
 
@@ -221,14 +222,14 @@ public class ObjectDisplayGrid extends JFrame implements KeyListener, InputSubje
         return new Char('0');
     }
 
-    public Item getItemFromDisplay(int x, int y) {
-        Item get = null;
+    public Displayable getItemFromDisplay(int x, int y) {
+        Displayable get = null;
         if ((0 <= x) && (x < objectGrid.length)) {
             if ((0 <= y) && (y < objectGrid[0].length)) {
                 if (objectGrid[x][y].size() > 1) {
                     Displayable keep = (Displayable) objectGrid[x][y].pop();
                     if (objectGrid[x][y].size() > 1) {
-                        get = (Item) objectGrid[x][y].peek();
+                        get = (Displayable) objectGrid[x][y].peek();
                     }
                     objectGrid[x][y].push(keep);
                     writeToTerminal(x, y);

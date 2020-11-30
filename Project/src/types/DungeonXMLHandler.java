@@ -167,9 +167,9 @@ public class DungeonXMLHandler extends DefaultHandler {
                 roomBeingParsed.addItem(item);
             } else if (displayableBeingParsed.peek() instanceof Player) {
                 if (itemBeingParsed instanceof Sword) {
-                    ((Player) creatureBeingParsed).setWeapon(((Player) creatureBeingParsed).addToPack(itemBeingParsed) - 1);
+                    ((Player) creatureBeingParsed).addToPack(itemBeingParsed);
                 } else if (itemBeingParsed instanceof Armor) {
-                    ((Player) creatureBeingParsed).setArmor(((Player) creatureBeingParsed).addToPack(itemBeingParsed) - 1);
+                    ((Player) creatureBeingParsed).addToPack(itemBeingParsed);
                 }
             }
 

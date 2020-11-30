@@ -9,6 +9,7 @@ public class Creature extends Displayable {
     private String name;
     private String id;
     private Random random = new Random();
+    private boolean alive = true;
 
     public Creature() {
         System.out.println("Creating creature");
@@ -50,16 +51,31 @@ public class Creature extends Displayable {
         return 0;
     }
 
+    public boolean getAlive() {
+        return alive;
+    }
+
+    public void setAlive(boolean val) {
+        alive = val;
+    }
+
     public int hit(Creature victim, ObjectDisplayGrid odg) {
-        int damage = random.nextInt(getMaxHit() + 1) + getSwordDamage() - victim.getArmorVal();
-        victim.setHp(victim.getHp() - damage);
-        for (CreatureAction action : victim.hitActions) {
-            action.activate(odg);
+        if (victim.getAlive()) {
+            int damage = random.nextInt(getMaxHit() + 1) + getSwordDamage() - victim.getArmorVal();
+            if (damage < 0) {
+                damage = 0;
+            }
+            victim.setHp(victim.getHp() - damage);
+            for (CreatureAction action : victim.hitActions) {
+                action.activate(odg);
+            }
+            return damage;
         }
-        return damage;
+        return -1;
     }
 
     public void die(ObjectDisplayGrid odg) {
+        setAlive(false);
         for (CreatureAction action : deathActions) {
             action.activate(odg);
         }

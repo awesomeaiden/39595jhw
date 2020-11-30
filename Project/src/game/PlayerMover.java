@@ -201,11 +201,10 @@ public class PlayerMover implements InputObserver, MoveSubject, Runnable {
 
     private void pickupItem() {
         if (displayGrid.getItemFromDisplay(player.getDispPosX(), player.getDispPosY()) instanceof Item) {
-            Item item = (Item)displayGrid.removeItemFromDisplay(player.getDispPosX(), player.getDispPosY());
+            Item item = (Item) displayGrid.removeItemFromDisplay(player.getDispPosX(), player.getDispPosY());
             if (player.addToPack(item) == -1) { // if can't pick up because pack is full
                 displayGrid.displayInfo("Pack full!");
             }
-            // TODO what to do about Hallucinate action? Need to register for movement observation
         }
     }
 
@@ -236,11 +235,10 @@ public class PlayerMover implements InputObserver, MoveSubject, Runnable {
     public void attackMonster(Player player, Monster monster) {
         // Player attacks monster
         int playerDamage = player.hit(monster, displayGrid);
-        if (monster.getHp() <= 0) {
-            monster.die(displayGrid);
-            displayGrid.removeObjectFromDisplay(monster.getDispPosX(), monster.getDispPosY());
+        if (monster.getHp() <= 0 && monster.getAlive()) {
             displayGrid.displayInfo("Player killed monster with attack for " + Integer.toString(playerDamage) + " damage!");
-        } else {
+            monster.die(displayGrid);
+        } else if (monster.getAlive()) {
             displayGrid.displayInfo("Player attacked monster for " + Integer.toString(playerDamage) + " damage!");
             try { // delay monster attack
                 Thread.sleep(1000);
@@ -250,15 +248,14 @@ public class PlayerMover implements InputObserver, MoveSubject, Runnable {
             // Monster attacks player
             int monsterDamage = monster.hit(player, displayGrid);
             if (player.getHp() <= 0) {
-                player.die(displayGrid);
-                displayGrid.removeObjectFromDisplay(player.getDispPosX(), player.getDispPosY());
                 displayGrid.displayInfo("Monster killed player with attack for " + Integer.toString(monsterDamage) + " damage!");
+                player.die(displayGrid);
                 playerDead = true;
             } else {
                 displayGrid.displayInfo("Monster attacked player for " + Integer.toString(monsterDamage) + " damage!");
             }
-            displayGrid.displayHp(player.getHp());
         }
+        displayGrid.displayHp(player.getHp());
     }
 
     @Override

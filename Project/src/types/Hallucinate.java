@@ -16,7 +16,7 @@ public class Hallucinate extends ItemAction implements MoveObserver {
     @Override
     public void observerUpdate(int _moves) {
         moves += _moves;
-        if (moves < getIntValue() && odg != null) {
+        if (moves <= getIntValue() && odg != null) {
             odg.hallucinate();
         } else if (pm != null) {
             odg.stopHallucinate();
