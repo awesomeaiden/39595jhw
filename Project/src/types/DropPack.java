@@ -12,6 +12,11 @@ public class DropPack extends CreatureAction {
     @Override
     public void activate(ObjectDisplayGrid odg) {
         Player player = (Player) getOwner();
-        player.removeFromPack(0);
+        Item item = player.removeFromPack(0);
+        if (item != null) {
+            odg.addItemToDisplay(item, player.getDispPosX(), player.getDispPosY());
+        } else {
+            odg.displayInfo("Invalid item index!");
+        }
     }
 }
