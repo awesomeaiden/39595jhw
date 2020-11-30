@@ -114,7 +114,9 @@ public class PlayerMover implements InputObserver, MoveSubject, Runnable {
                         helpMode = false;
                     } else if (readMode) {
                         if (48 <= ch && ch <= 57) {
-                            if(!player.readScroll(ch - 49, displayGrid, this)) {
+                            if (player.readScroll(ch - 49, displayGrid, this)) {
+                                displayGrid.displayInfo("Scroll activated!");
+                            } else {
                                 displayGrid.displayInfo("Item is not a scroll!");
                             }
                         }

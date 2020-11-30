@@ -303,6 +303,7 @@ public class ObjectDisplayGrid extends JFrame implements KeyListener, InputSubje
         return hallucinateChars.get(random.nextInt(hallucinateChars.size()));
     }
 
+    // TODO: Fix other letters on screen changing outside of play area
     public void hallucinate() {
         for (Displayable changeSpace : hallucinateSpaces) {
             changeSpace.setHallucinate(true);
