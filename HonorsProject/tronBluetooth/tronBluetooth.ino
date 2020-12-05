@@ -12,6 +12,9 @@ int state = 0;
 //   NEO_RGB     Pixels are wired for RGB bitstream (v1 FLORA pixels, not v2)
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(100, PIN, NEO_GRB + NEO_KHZ800);
 uint32_t tron = strip.Color(46, 185, 255);
+char mode;
+char data;
+bool newMode;
 
 // For bluetooth module
 SoftwareSerial bSerial(2, 3); // RX, TX
@@ -19,20 +22,45 @@ SoftwareSerial bSerial(2, 3); // RX, TX
 void setup() {
   strip.begin();
   strip.show(); // Initialize all pixels to 'off'
-  strip.setBrightness(100);
+  strip.setBrightness(25);
   // Set the data rate for the bluetooth serial communication
   bSerial.begin(9600);
   bSerial.println("AT");
+  mode = 'p';
+  newMode = false;
 }
 
 void loop() {
-  pulse(tron, 70, 0);
+  if (newMode) {
+    newMode = false;
+  }
+  
+  if (bSerial.available()){
+    data = bSerial.read();
+    if (data != ' ' && data != mode) {
+      mode = data;
+      newMode = true;
+    }
+  }
+
+  if (mode == 'p') {
+    pulse(tron, 50, 0);
+  } else if (mode == 'c') {
+    colorWipe(tron, 30);
+  } else if (mode == 'r') {
+    rainbow(30);
+  } else {
+    strip.clear();
+    strip.show();
+  }
 }
 
 void pulse(uint32_t c, uint16_t width, uint8_t wait) {
   uint16_t widthStep = 100 / (width / 2);
   for (uint16_t i = 0; i < strip.numPixels(); i++) {
+    if (newMode) {break;}
     for (uint16_t j = 0; j < (width / 2); j++) {
+      if (newMode) {break;}
       if ((i + j) > strip.numPixels()) {
         strip.setPixelColor(i + j - strip.numPixels(), percent(c, (j + 1)*widthStep));
       } else {
@@ -40,6 +68,7 @@ void pulse(uint32_t c, uint16_t width, uint8_t wait) {
       }
     }
     for (uint16_t k = (width / 2); k < width; k++) {
+      if (newMode) {break;}
       if ((i + k) > strip.numPixels()) {
         strip.setPixelColor(i + k - strip.numPixels(), percent(c, (width - k)*widthStep));
       } else {
@@ -49,28 +78,29 @@ void pulse(uint32_t c, uint16_t width, uint8_t wait) {
     strip.show();
     strip.setPixelColor(i, 0); // clear trailing pixel
     delay(wait);
-  }  
+  }
 }
 
 uint32_t percent(uint32_t orig, uint8_t perc) {
-    int red = (orig >> 16) & 255;
-    int green = (orig >> 8) & 255;
-    int blue = (orig) & 255;
-    red = (red * perc) / 100;
-    green = (green * perc) / 100;
-    blue = (blue * perc) / 100;
-    Serial.print(red);
-    Serial.print(green);
-    Serial.print(blue);
-    return strip.Color(red, green, blue);
+  int red = (orig >> 16) & 255;
+  int green = (orig >> 8) & 255;
+  int blue = (orig) & 255;
+  red = (red * perc) / 100;
+  green = (green * perc) / 100;
+  blue = (blue * perc) / 100;
+  Serial.print(red);
+  Serial.print(green);
+  Serial.print(blue);
+  return strip.Color(red, green, blue);
 }
 
 // Fill the dots one after the other with a color
 void colorWipe(uint32_t c, uint8_t wait) {
   for(uint16_t i=0; i<strip.numPixels(); i++) {
-      strip.setPixelColor(i, c);
-      strip.show();
-      delay(wait);
+    if (newMode) {break;}
+    strip.setPixelColor(i, c);
+    strip.show();
+    delay(wait);
   }
 }
 
@@ -78,7 +108,9 @@ void rainbow(uint8_t wait) {
   uint16_t i, j;
 
   for(j=0; j<256; j++) {
+    if (newMode) {break;}
     for(i=0; i<strip.numPixels(); i++) {
+      if (newMode) {break;}
       strip.setPixelColor(i, Wheel((i+j) & 255));
     }
     strip.show();
@@ -91,7 +123,9 @@ void rainbowCycle(uint8_t wait) {
   uint16_t i, j;
 
   for(j=0; j<256*5; j++) { // 5 cycles of all colors on wheel
+    if (newMode) {break;}
     for(i=0; i< strip.numPixels(); i++) {
+      if (newMode) {break;}
       strip.setPixelColor(i, Wheel(((i * 256 / strip.numPixels()) + j) & 255));
     }
     strip.show();
@@ -102,8 +136,11 @@ void rainbowCycle(uint8_t wait) {
 //Theatre-style crawling lights.
 void theaterChase(uint32_t c, uint8_t wait) {
   for (int j=0; j<10; j++) {  //do 10 cycles of chasing
+    if (newMode) {break;}
     for (int q=0; q < 3; q++) {
+      if (newMode) {break;}
       for (int i=0; i < strip.numPixels(); i=i+3) {
+        if (newMode) {break;}
         strip.setPixelColor(i+q, c);    //turn every third pixel on
       }
       strip.show();
@@ -111,6 +148,7 @@ void theaterChase(uint32_t c, uint8_t wait) {
       delay(wait);
      
       for (int i=0; i < strip.numPixels(); i=i+3) {
+        if (newMode) {break;}
         strip.setPixelColor(i+q, 0);        //turn every third pixel off
       }
     }
@@ -120,8 +158,11 @@ void theaterChase(uint32_t c, uint8_t wait) {
 //Theatre-style crawling lights with rainbow effect
 void theaterChaseRainbow(uint8_t wait) {
   for (int j=0; j < 256; j++) {     // cycle all 256 colors in the wheel
+    if (newMode) {break;}
     for (int q=0; q < 3; q++) {
+      if (newMode) {break;}
         for (int i=0; i < strip.numPixels(); i=i+3) {
+          if (newMode) {break;}
           strip.setPixelColor(i+q, Wheel( (i+j) % 255));    //turn every third pixel on
         }
         strip.show();
@@ -129,6 +170,7 @@ void theaterChaseRainbow(uint8_t wait) {
         delay(wait);
        
         for (int i=0; i < strip.numPixels(); i=i+3) {
+          if (newMode) {break;}
           strip.setPixelColor(i+q, 0);        //turn every third pixel off
         }
     }

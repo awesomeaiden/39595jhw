@@ -3,4 +3,12 @@
     <string name="title_custom">Custom</string>
     <string name="title_presets">Presets</string>
     <string name="title_pair">Pair</string>
+    <string name="title_devices">Devices</string>
+    <string name="ble_not_supported">BLE not supported!</string>
+    <string name="error_bluetooth_not_supported">Bluetooth not supported!</string>
+    <string name="no_data">No data!</string>
+    <string name="connected">Connected!</string>
+    <string name="disconnected">Disconnected!</string>
+    <string name="unknown_characteristic">Unknown characteristic!</string>
+    <string name="unknown_service">Unknown service!</string>
 </resources>
