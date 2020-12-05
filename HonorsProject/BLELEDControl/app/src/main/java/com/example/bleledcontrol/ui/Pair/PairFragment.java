@@ -21,6 +21,7 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -176,7 +177,7 @@ public class PairFragment extends Fragment {
     }
 
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
         getActivity().registerReceiver(mGattUpdateReceiver, makeGattUpdateIntentFilter());
         if (mBluetoothLeService != null) {
@@ -186,19 +187,18 @@ public class PairFragment extends Fragment {
     }
 
     @Override
-    protected void onPause() {
+    public void onPause() {
         super.onPause();
         getActivity().unregisterReceiver(mGattUpdateReceiver);
     }
 
     @Override
-    protected void onDestroy() {
+    public void onDestroy() {
         super.onDestroy();
         getActivity().unbindService(mServiceConnection);
         mBluetoothLeService = null;
     }
 
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getActivity().getMenuInflater().inflate(R.menu.gatt_services, menu);
         if (mConnected) {
