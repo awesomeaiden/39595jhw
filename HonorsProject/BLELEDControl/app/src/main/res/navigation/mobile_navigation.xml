@@ -4,22 +4,4 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
     app:startDestination="@+id/navigation_presets">
-
-    <fragment
-        android:id="@+id/navigation_custom"
-        android:name="com.example.bleledcontrol.ui.Custom.CustomFragment"
-        android:label="@string/title_custom"
-        tools:layout="@layout/fragment_custom" />
-
-    <fragment
-        android:id="@+id/navigation_presets"
-        android:name="com.example.bleledcontrol.ui.Presets.PresetsFragment"
-        android:label="@string/title_presets"
-        tools:layout="@layout/fragment_presets" />
-
-    <fragment
-        android:id="@+id/navigation_pair"
-        android:name="com.example.bleledcontrol.ui.Pair.PairFragment"
-        android:label="@string/title_pair"
-        tools:layout="@layout/fragment_pair" />
 </navigation>
