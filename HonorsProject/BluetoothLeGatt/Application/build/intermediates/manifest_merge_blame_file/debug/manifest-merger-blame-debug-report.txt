@@ -1,0 +1,80 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.example.android.bluetoothlegatt"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="18"
+8-->D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml
+9        android:targetSdkVersion="28" />
+9-->D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml
+10    <!-- Min/target SDK versions (<uses-sdk>) managed by build.gradle -->
+11    <!--
+12 Declare this required feature if you want to make the app available to BLE-capable
+13    devices only.  If you want to make your app available to devices that don't support BLE,
+14    you should omit this in the manifest.  Instead, determine BLE capability by using
+15    PackageManager.hasSystemFeature(FEATURE_BLUETOOTH_LE)
+16    -->
+17    <uses-feature
+17-->D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:13:5-15:35
+18        android:name="android.hardware.bluetooth_le"
+18-->D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:14:9-53
+19        android:required="true" />
+19-->D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:15:9-32
+20
+21    <uses-permission android:name="android.permission.BLUETOOTH" />
+21-->D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:17:5-68
+21-->D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:17:22-65
+22    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+22-->D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:18:5-74
+22-->D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:18:22-71
+23    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+23-->D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:19:5-81
+23-->D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:19:22-78
+24
+25    <application
+25-->D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:21:5-40:19
+26        android:appComponentFactory="android.support.v4.app.CoreComponentFactory"
+26-->[com.android.support:support-compat:28.0.0] C:\Users\aiden\.gradle\caches\transforms-2\files-2.1\2a6c121eda6c2cbe33230f54b72bbbd4\support-compat-28.0.0\AndroidManifest.xml:22:18-91
+27        android:debuggable="true"
+28        android:icon="@drawable/ic_launcher"
+28-->D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:22:9-45
+29        android:label="@string/app_name"
+29-->D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:23:9-41
+30        android:testOnly="true"
+31        android:theme="@android:style/Theme.Holo.Light" >
+31-->D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:24:9-56
+32        <activity android:name="com.example.android.NewBLELEDControl.PresetsActivity" />
+32-->D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:25:9-98
+32-->D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:25:19-86
+33        <activity
+33-->D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:26:9-34:20
+34            android:name="com.example.android.NewBLELEDControl.DeviceScanActivity"
+34-->D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:27:13-83
+35            android:label="@string/app_name" >
+35-->D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:28:13-45
+36            <intent-filter>
+36-->D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:29:13-33:29
+37                <action android:name="android.intent.action.MAIN" />
+37-->D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:30:17-69
+37-->D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:30:25-66
+38
+39                <category android:name="android.intent.category.LAUNCHER" />
+39-->D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:32:17-77
+39-->D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:32:27-74
+40            </intent-filter>
+41        </activity>
+42        <activity android:name="com.example.android.NewBLELEDControl.DeviceControlActivity" />
+42-->D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:35:9-95
+42-->D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:35:19-92
+43
+44        <service
+44-->D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:37:9-39:38
+45            android:name="com.example.android.NewBLELEDControl.BluetoothLeService"
+45-->D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:38:13-83
+46            android:enabled="true" />
+46-->D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:39:13-35
+47    </application>
+48
+49</manifest>
