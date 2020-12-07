@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:2:1-42:12
-INJECTED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:2:1-42:12
-INJECTED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:2:1-42:12
-INJECTED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:2:1-42:12
+ADDED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:2:1-40:12
+INJECTED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:2:1-40:12
+INJECTED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:2:1-40:12
+INJECTED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:2:1-40:12
 MERGED from [com.android.support:support-v13:28.0.0] C:\Users\aiden\.gradle\caches\transforms-2\files-2.1\9cda34f38c4a5f4a28a14bcd033bdfbb\support-v13-28.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:support-v4:28.0.0] C:\Users\aiden\.gradle\caches\transforms-2\files-2.1\c009a5722a0be9476b5b3db7ef172e15\support-v4-28.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:cardview-v7:28.0.0] C:\Users\aiden\.gradle\caches\transforms-2\files-2.1\f25d4240cf20cce77cd04fd4ffcfeaf7\cardview-v7-28.0.0\AndroidManifest.xml:17:1-22:12
@@ -35,43 +35,45 @@ MERGED from [android.arch.lifecycle:viewmodel:1.1.1] C:\Users\aiden\.gradle\cach
 MERGED from [android.arch.lifecycle:livedata:1.1.1] C:\Users\aiden\.gradle\caches\transforms-2\files-2.1\3ff1dcd229f05d3ed6ea73e9bcec5fe8\livedata-1.1.1\AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.lifecycle:livedata-core:1.1.1] C:\Users\aiden\.gradle\caches\transforms-2\files-2.1\8dca7e011b2c99528440907406c0541e\livedata-core-1.1.1\AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.core:runtime:1.1.1] C:\Users\aiden\.gradle\caches\transforms-2\files-2.1\6798853c956e78fbccb8ca635a9e6671\runtime-1.1.1\AndroidManifest.xml:17:1-22:12
-INJECTED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:2:1-42:12
-INJECTED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:2:1-42:12
-INJECTED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:2:1-42:12
+INJECTED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:2:1-40:12
+INJECTED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:2:1-40:12
+INJECTED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:2:1-40:12
 	package
-		ADDED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:3:5-50
+		ADDED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:4:5-51
 		INJECTED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml
 		INJECTED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml
 	android:versionName
-		ADDED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:5:5-30
+		ADDED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:6:5-30
 		INJECTED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml
 		INJECTED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml
+	xmlns:tools
+		ADDED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:3:5-51
 	xmlns:android
 		ADDED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:2:11-69
 	android:versionCode
-		ADDED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:4:5-28
+		ADDED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:5:5-28
 		INJECTED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml
 		INJECTED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml
 uses-feature#android.hardware.bluetooth_le
-ADDED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:13:5-15:35
+ADDED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:14:5-16:35
 	android:required
-		ADDED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:15:9-32
+		ADDED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:16:9-32
 	android:name
-		ADDED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:14:9-53
+		ADDED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:15:9-53
 uses-permission#android.permission.BLUETOOTH
-ADDED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:17:5-68
+ADDED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:18:5-68
 	android:name
-		ADDED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:17:22-65
+		ADDED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:18:22-65
 uses-permission#android.permission.BLUETOOTH_ADMIN
-ADDED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:18:5-74
+ADDED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:19:5-74
 	android:name
-		ADDED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:18:22-71
+		ADDED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:19:22-71
 uses-permission#android.permission.ACCESS_COARSE_LOCATION
-ADDED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:19:5-81
+ADDED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:20:5-81
 	android:name
-		ADDED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:19:22-78
+		ADDED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:20:22-78
 application
-ADDED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:21:5-40:19
+ADDED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:22:5-38:19
 MERGED from [com.android.support.constraint:constraint-layout:1.1.3] C:\Users\aiden\.gradle\caches\transforms-2\files-2.1\b86b41220db59f6c596245c4fe2b6212\constraint-layout-1.1.3\AndroidManifest.xml:9:5-20
 MERGED from [com.android.support.constraint:constraint-layout:1.1.3] C:\Users\aiden\.gradle\caches\transforms-2\files-2.1\b86b41220db59f6c596245c4fe2b6212\constraint-layout-1.1.3\AndroidManifest.xml:9:5-20
 MERGED from [com.android.support:support-compat:28.0.0] C:\Users\aiden\.gradle\caches\transforms-2\files-2.1\2a6c121eda6c2cbe33230f54b72bbbd4\support-compat-28.0.0\AndroidManifest.xml:22:5-94
@@ -81,41 +83,41 @@ MERGED from [com.android.support:versionedparcelable:28.0.0] C:\Users\aiden\.gra
 	android:appComponentFactory
 		ADDED from [com.android.support:support-compat:28.0.0] C:\Users\aiden\.gradle\caches\transforms-2\files-2.1\2a6c121eda6c2cbe33230f54b72bbbd4\support-compat-28.0.0\AndroidManifest.xml:22:18-91
 	android:label
-		ADDED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:23:9-41
+		ADDED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:24:9-41
 	android:icon
-		ADDED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:22:9-45
+		ADDED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:23:9-45
 	android:theme
-		ADDED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:24:9-56
+		ADDED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:25:9-65
 activity#com.example.android.NewBLELEDControl.PresetsActivity
-ADDED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:25:9-98
+ADDED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:26:9-89
 	android:name
-		ADDED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:25:19-86
+		ADDED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:26:19-86
 activity#com.example.android.NewBLELEDControl.DeviceScanActivity
-ADDED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:26:9-34:20
+ADDED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:27:9-33:20
 	android:label
 		ADDED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:28:13-45
 	android:name
-		ADDED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:27:13-83
+		ADDED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:27:19-89
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:29:13-33:29
+ADDED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:29:13-32:29
 action#android.intent.action.MAIN
 ADDED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:30:17-69
 	android:name
 		ADDED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:30:25-66
 category#android.intent.category.LAUNCHER
-ADDED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:32:17-77
+ADDED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:31:17-77
 	android:name
-		ADDED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:32:27-74
+		ADDED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:31:27-74
 activity#com.example.android.NewBLELEDControl.DeviceControlActivity
-ADDED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:35:9-95
+ADDED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:34:9-95
 	android:name
-		ADDED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:35:19-92
+		ADDED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:34:19-92
 service#com.example.android.NewBLELEDControl.BluetoothLeService
-ADDED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:37:9-39:38
+ADDED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:35:9-37:38
 	android:enabled
-		ADDED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:39:13-35
+		ADDED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:37:13-35
 	android:name
-		ADDED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:38:13-83
+		ADDED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml:36:13-83
 uses-sdk
 INJECTED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from D:\Documents\School\5_Junior_2020\ECE_39595\Homework\HonorsProject\BluetoothLeGatt\Application\src\main\AndroidManifest.xml

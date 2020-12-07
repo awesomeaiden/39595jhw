@@ -1,4 +1,4 @@
-com.example.android.bluetoothlegatt
+com.example.android.newbleledcontrol
 anim abc_fade_in
 anim abc_fade_out
 anim abc_grow_fade_in_from_bottom
@@ -707,7 +707,13 @@ id barrier
 id beginning
 id blocking
 id bottom
+id button
 id buttonPanel
+id button_send_a
+id button_send_c
+id button_send_o
+id button_send_p
+id button_send_r
 id cancel_action
 id center
 id center_horizontal
@@ -723,7 +729,6 @@ id content
 id contentPanel
 id custom
 id customPanel
-id data_value
 id decor_content_parent
 id default_activity_button
 id device_address
@@ -740,7 +745,6 @@ id fill
 id fill_horizontal
 id fill_vertical
 id forever
-id gatt_services_list
 id gone
 id group_divider
 id groups
@@ -761,6 +765,7 @@ id list_item
 id media_actions
 id menu_connect
 id menu_disconnect
+id menu_find_device
 id menu_refresh
 id menu_scan
 id menu_stop
@@ -892,6 +897,7 @@ layout select_dialog_singlechoice_material
 layout support_simple_spinner_dropdown_item
 menu gatt_services
 menu main
+menu preset_menu
 string abc_action_bar_home_description
 string abc_action_bar_up_description
 string abc_action_menu_overflow_description
@@ -933,18 +939,31 @@ string abc_shareactionprovider_share_with_application
 string abc_toolbar_collapse_description
 string app_name
 string ble_not_supported
+string button_all_mode
+string button_colorwipe_mode
+string button_off_mode
+string button_pulse_mode
+string button_rainbow_mode
+string button_send_p
+string button_send_r
 string connected
 string disconnected
 string error_bluetooth_not_supported
+string find_device
 string intro_message
 string label_data
 string label_device_address
+string label_modes
+string label_send_r
 string label_state
+string label_status
 string menu_connect
 string menu_disconnect
+string menu_refresh
 string menu_scan
 string menu_stop
 string no_data
+string rgb_bt_uuid
 string search_menu_title
 string status_bar_notification_info_overflow
 string title_devices

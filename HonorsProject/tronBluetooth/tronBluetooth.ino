@@ -35,6 +35,32 @@ void loop() {
     newMode = false;
   }
   
+  if (mode == 'p') {
+    pulse(tron, 50, 0);
+  } else if (mode == 'c') {
+    colorWipe(tron, 30);
+  } else if (mode == 'r') {
+    rainbow(30);
+  } else if (mode == 'a') {
+    colorWipe(strip.Color(255,   0,   0), 30);    // Red
+    colorWipe(strip.Color(  0, 255,   0), 30);    // Green
+    colorWipe(strip.Color(  0,   0, 255), 30);    // Blue
+    pulse(tron, 50, 0);
+    rainbow(30);
+  } else if (mode == 'o') {
+    strip.clear();
+    strip.show();
+    while (checkNewMode() == false) {
+      delay(100);
+    }
+  } else {
+    while (checkNewMode() == false) {
+      delay(100);
+    }
+  }
+}
+
+boolean checkNewMode() {
   if (bSerial.available()){
     data = bSerial.read();
     if (data != ' ' && data != mode) {
@@ -42,25 +68,15 @@ void loop() {
       newMode = true;
     }
   }
-
-  if (mode == 'p') {
-    pulse(tron, 50, 0);
-  } else if (mode == 'c') {
-    colorWipe(tron, 30);
-  } else if (mode == 'r') {
-    rainbow(30);
-  } else {
-    strip.clear();
-    strip.show();
-  }
+  
+  return newMode;
 }
 
 void pulse(uint32_t c, uint16_t width, uint8_t wait) {
   uint16_t widthStep = 100 / (width / 2);
   for (uint16_t i = 0; i < strip.numPixels(); i++) {
-    if (newMode) {break;}
+    if (checkNewMode()) {break;}
     for (uint16_t j = 0; j < (width / 2); j++) {
-      if (newMode) {break;}
       if ((i + j) > strip.numPixels()) {
         strip.setPixelColor(i + j - strip.numPixels(), percent(c, (j + 1)*widthStep));
       } else {
@@ -68,7 +84,6 @@ void pulse(uint32_t c, uint16_t width, uint8_t wait) {
       }
     }
     for (uint16_t k = (width / 2); k < width; k++) {
-      if (newMode) {break;}
       if ((i + k) > strip.numPixels()) {
         strip.setPixelColor(i + k - strip.numPixels(), percent(c, (width - k)*widthStep));
       } else {
@@ -97,7 +112,7 @@ uint32_t percent(uint32_t orig, uint8_t perc) {
 // Fill the dots one after the other with a color
 void colorWipe(uint32_t c, uint8_t wait) {
   for(uint16_t i=0; i<strip.numPixels(); i++) {
-    if (newMode) {break;}
+    if (checkNewMode()) {break;}
     strip.setPixelColor(i, c);
     strip.show();
     delay(wait);
@@ -108,9 +123,8 @@ void rainbow(uint8_t wait) {
   uint16_t i, j;
 
   for(j=0; j<256; j++) {
-    if (newMode) {break;}
+    if (checkNewMode()) {break;}
     for(i=0; i<strip.numPixels(); i++) {
-      if (newMode) {break;}
       strip.setPixelColor(i, Wheel((i+j) & 255));
     }
     strip.show();
@@ -123,9 +137,8 @@ void rainbowCycle(uint8_t wait) {
   uint16_t i, j;
 
   for(j=0; j<256*5; j++) { // 5 cycles of all colors on wheel
-    if (newMode) {break;}
+    if (checkNewMode()) {break;}
     for(i=0; i< strip.numPixels(); i++) {
-      if (newMode) {break;}
       strip.setPixelColor(i, Wheel(((i * 256 / strip.numPixels()) + j) & 255));
     }
     strip.show();
@@ -136,11 +149,9 @@ void rainbowCycle(uint8_t wait) {
 //Theatre-style crawling lights.
 void theaterChase(uint32_t c, uint8_t wait) {
   for (int j=0; j<10; j++) {  //do 10 cycles of chasing
-    if (newMode) {break;}
     for (int q=0; q < 3; q++) {
-      if (newMode) {break;}
+      if (checkNewMode()) {break;}
       for (int i=0; i < strip.numPixels(); i=i+3) {
-        if (newMode) {break;}
         strip.setPixelColor(i+q, c);    //turn every third pixel on
       }
       strip.show();
@@ -148,7 +159,6 @@ void theaterChase(uint32_t c, uint8_t wait) {
       delay(wait);
      
       for (int i=0; i < strip.numPixels(); i=i+3) {
-        if (newMode) {break;}
         strip.setPixelColor(i+q, 0);        //turn every third pixel off
       }
     }
@@ -158,21 +168,18 @@ void theaterChase(uint32_t c, uint8_t wait) {
 //Theatre-style crawling lights with rainbow effect
 void theaterChaseRainbow(uint8_t wait) {
   for (int j=0; j < 256; j++) {     // cycle all 256 colors in the wheel
-    if (newMode) {break;}
     for (int q=0; q < 3; q++) {
-      if (newMode) {break;}
-        for (int i=0; i < strip.numPixels(); i=i+3) {
-          if (newMode) {break;}
-          strip.setPixelColor(i+q, Wheel( (i+j) % 255));    //turn every third pixel on
-        }
-        strip.show();
+      if (checkNewMode()) {break;}
+      for (int i=0; i < strip.numPixels(); i=i+3) {
+        strip.setPixelColor(i+q, Wheel( (i+j) % 255));    //turn every third pixel on
+      }
+      strip.show();
        
-        delay(wait);
+      delay(wait);
        
-        for (int i=0; i < strip.numPixels(); i=i+3) {
-          if (newMode) {break;}
-          strip.setPixelColor(i+q, 0);        //turn every third pixel off
-        }
+      for (int i=0; i < strip.numPixels(); i=i+3) {
+        strip.setPixelColor(i+q, 0);        //turn every third pixel off
+      }
     }
   }
 }

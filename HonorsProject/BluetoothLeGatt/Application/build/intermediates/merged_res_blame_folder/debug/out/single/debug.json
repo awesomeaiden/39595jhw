@@ -12,8 +12,8 @@
         "source": "D:\\Documents\\School\\5_Junior_2020\\ECE_39595\\Homework\\HonorsProject\\BluetoothLeGatt\\Application\\src\\main\\res\\drawable-mdpi\\ic_launcher.png"
     },
     {
-        "merged": "D:\\Documents\\School\\5_Junior_2020\\ECE_39595\\Homework\\HonorsProject\\BluetoothLeGatt\\Application\\build\\intermediates\\res\\merged\\debug\\layout_actionbar_indeterminate_progress.xml.flat",
-        "source": "D:\\Documents\\School\\5_Junior_2020\\ECE_39595\\Homework\\HonorsProject\\BluetoothLeGatt\\Application\\src\\main\\res\\layout\\actionbar_indeterminate_progress.xml"
+        "merged": "D:\\Documents\\School\\5_Junior_2020\\ECE_39595\\Homework\\HonorsProject\\BluetoothLeGatt\\Application\\build\\intermediates\\res\\merged\\debug\\menu_preset_menu.xml.flat",
+        "source": "D:\\Documents\\School\\5_Junior_2020\\ECE_39595\\Homework\\HonorsProject\\BluetoothLeGatt\\Application\\src\\main\\res\\menu\\preset_menu.xml"
     },
     {
         "merged": "D:\\Documents\\School\\5_Junior_2020\\ECE_39595\\Homework\\HonorsProject\\BluetoothLeGatt\\Application\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_tile.9.png.flat",
@@ -36,11 +36,15 @@
         "source": "D:\\Documents\\School\\5_Junior_2020\\ECE_39595\\Homework\\HonorsProject\\BluetoothLeGatt\\Application\\src\\main\\res\\layout\\listitem_device.xml"
     },
     {
-        "merged": "D:\\Documents\\School\\5_Junior_2020\\ECE_39595\\Homework\\HonorsProject\\BluetoothLeGatt\\Application\\build\\intermediates\\res\\merged\\debug\\menu_main.xml.flat",
-        "source": "D:\\Documents\\School\\5_Junior_2020\\ECE_39595\\Homework\\HonorsProject\\BluetoothLeGatt\\Application\\src\\main\\res\\menu\\main.xml"
-    },
-    {
         "merged": "D:\\Documents\\School\\5_Junior_2020\\ECE_39595\\Homework\\HonorsProject\\BluetoothLeGatt\\Application\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_ic_launcher.png.flat",
         "source": "D:\\Documents\\School\\5_Junior_2020\\ECE_39595\\Homework\\HonorsProject\\BluetoothLeGatt\\Application\\src\\main\\res\\drawable-xhdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "D:\\Documents\\School\\5_Junior_2020\\ECE_39595\\Homework\\HonorsProject\\BluetoothLeGatt\\Application\\build\\intermediates\\res\\merged\\debug\\layout_actionbar_indeterminate_progress.xml.flat",
+        "source": "D:\\Documents\\School\\5_Junior_2020\\ECE_39595\\Homework\\HonorsProject\\BluetoothLeGatt\\Application\\src\\main\\res\\layout\\actionbar_indeterminate_progress.xml"
+    },
+    {
+        "merged": "D:\\Documents\\School\\5_Junior_2020\\ECE_39595\\Homework\\HonorsProject\\BluetoothLeGatt\\Application\\build\\intermediates\\res\\merged\\debug\\menu_main.xml.flat",
+        "source": "D:\\Documents\\School\\5_Junior_2020\\ECE_39595\\Homework\\HonorsProject\\BluetoothLeGatt\\Application\\src\\main\\res\\menu\\main.xml"
     }
 ]

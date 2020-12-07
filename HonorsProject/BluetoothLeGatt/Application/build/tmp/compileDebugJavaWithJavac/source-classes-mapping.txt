@@ -1,5 +1,5 @@
-com/example/android/bluetoothlegatt/BuildConfig.java
- com.example.android.bluetoothlegatt.BuildConfig
+com/example/android/newbleledcontrol/BuildConfig.java
+ com.example.android.newbleledcontrol.BuildConfig
 com/example/android/NewBLELEDControl/DeviceControlActivity.java
  com.example.android.NewBLELEDControl.DeviceControlActivity
  com.example.android.NewBLELEDControl.DeviceControlActivity$1

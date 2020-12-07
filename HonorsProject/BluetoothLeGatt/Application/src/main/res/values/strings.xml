@@ -20,7 +20,7 @@
     <string name="no_data">No data</string>
     <string name="connected">Connected</string>
     <string name="disconnected">Disconnected</string>
-    <string name="title_devices">BLE Device Scan</string>
+    <string name="title_devices">RGB BLE Scan</string>
     <string name="error_bluetooth_not_supported">Bluetooth not supported.</string>
 
     <string name="unknown_device">Unknown device</string>
@@ -34,4 +34,17 @@
     <string name="menu_stop">Stop</string>
     <string name="label_send_r">Send r</string>
     <string name="button_send_r">Send r</string>
+    <string name="menu_refresh">Refresh</string>
+    <string name="button_send_p">Send p</string>
+
+    <!-- BLE RGB -->
+    <string name="rgb_bt_uuid">0000ffe1–0000–1000-8000-00805f9b34fb</string>
+    <string name="find_device">Find Device</string>
+    <string name="label_status">Status:</string>
+    <string name="button_rainbow_mode">Rainbow</string>
+    <string name="button_pulse_mode">Pulse</string>
+    <string name="button_colorwipe_mode">Color Wipe</string>
+    <string name="button_all_mode">All</string>
+    <string name="button_off_mode">Off</string>
+    <string name="label_modes">Modes:</string>
 </resources>

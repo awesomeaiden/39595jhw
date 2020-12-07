@@ -38,7 +38,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.android.bluetoothlegatt.R;
+import com.example.android.newbleledcontrol.R;
 
 import java.util.ArrayList;
 
